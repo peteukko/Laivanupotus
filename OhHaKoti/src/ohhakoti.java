@@ -14,7 +14,7 @@ public class ohhakoti {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hei!!");
+        System.out.println("Hei miten menee!!");
     }
     
 }
