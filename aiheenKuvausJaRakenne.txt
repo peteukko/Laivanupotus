@@ -1,6 +1,13 @@
-Laivanupotus. Peli‰ pelataan 10x10 ruudukolla, ja pelaajia on kaksi: joko kaksi k‰ytt‰j‰‰, tai yksi k‰ytt‰j‰ vastaan tietokone. Ruudukkoja on kaksi, yksi molemmalle pelaajalle. Peli aloitetaan asttemalla 5 eri pituista (1-5 ruutua) laivaa omalle ruudukolle pysty- tai vaakaasennossa, niin, ett‰ laivat eiv‰t kosketa toisiaan muuta kuin kulmittain. Pelaajat eiv‰t n‰‰ toistensa laivoja. Peli‰ pelataan vuorottain: Arvataan jokin ruutu, johon ammutaan vastustajan laudalla. Ruutuun tulee t‰llˆin aina merkint‰: rasti, jos ammus osui laivaan, ja ympyr‰, jos ammus ei osunnut laivaan. Jos ammus osuu laivaan, pelaaja saa lis‰vuoron. Alus tuhoutuu, kun jokaiseen sen t‰ytt‰m‰‰n ruutuun on ammuttu. Alus merkit‰‰n t‰llˆin tuhoutuneeksi. Pelaaja, joka ensiksi tuhoaa kaikki vastustajan laivat, voittaa pelin.
+Laivanupotus. Peli‰ pelataan 10x10 ruudukolla, ja pelaajia on kaksi: joko kaksi k‰ytt‰j‰‰, tai yksi k‰ytt‰j‰ vastaan tietokone. 
+Ruudukkoja on kaksi, yksi molemmalle pelaajalle. Peli aloitetaan asttemalla 5 eri pituista (1-5 ruutua) laivaa omalle ruudukolle 
+pysty- tai vaakaasennossa, niin, ett‰ laivat eiv‰t kosketa toisiaan muuta kuin kulmittain. Pelaajat eiv‰t n‰‰ toistensa laivoja. 
+Peli‰ pelataan vuorottain: Arvataan jokin ruutu, johon ammutaan vastustajan laudalla. Ruutuun tulee t‰llˆin aina merkint‰: 
+rasti, jos ammus osui laivaan, ja ympyr‰, jos ammus ei osunnut laivaan. Jos ammus osuu laivaan, pelaaja saa lis‰vuoron. 
+Alus tuhoutuu, kun jokaiseen sen t‰ytt‰m‰‰n ruutuun on ammuttu. Alus merkit‰‰n t‰llˆin tuhoutuneeksi. 
+Pelaaja, joka ensiksi tuhoaa kaikki vastustajan laivat, voittaa pelin.
 
-Tietokoneella on yksinkertoinen keino‰ly: ammutaan satunnaiseen ruutuun, jossa ei ola ympyr‰‰ tai rastia. T‰t‰ toistetaan, kunnes ammus osuu laivaan. T‰llˆin pistet‰‰n ruutu muistiin: seuraavalla vuorolla ammutaan satunnaiseen vieress‰ olevaan ruutuun.  
+Tietokoneella on yksinkertoinen keino‰ly: ammutaan satunnaiseen ruutuun, jossa ei ola ympyr‰‰ tai rastia. 
+T‰t‰ toistetaan, kunnes ammus osuu laivaan. T‰llˆin pistet‰‰n ruutu muistiin: seuraavalla vuorolla ammutaan satunnaiseen vieress‰ olevaan ruutuun.  
 Jos ammus menee t‰ll‰ kertaa ohi, ammutaan t‰t‰ seuraavalla vuorolla toiseen ruutuun, joka on alkuper‰isen ruudun vierell‰ (ja jossa ei ole ympyr‰‰ tai rastia).
 Jos ammus osui, merkit‰‰n t‰m‰ toinen ruutu myˆs muistiin: nyt, seuraavalla kerralla ammutaan jompaankumpaan ruutuun, joka on kahden merkityn  ruudun 		 muodostaman "ruutuviivan" p‰‰ss‰. Jos ammus menee ohi, ammu seuravaaksi toiseen n‰ist‰ ruuduista - nyt ammus osuu ja ammutaan aina vain seuraavaan ruutuun "ruutulinjalla", kunnes laiva tuhoutuu, ja palataan alkuper‰iseen strategiaan (ammu satunnaiseen ruutuun, jossa ei ole ympyr‰‰ tai rastia).
 
