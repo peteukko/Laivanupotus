@@ -9,6 +9,7 @@ Pelaaja, joka ensiksi tuhoaa kaikki vastustajan laivat, voittaa pelin.
 Tietokoneella on yksinkertoinen keinoäly: ammutaan satunnaiseen ruutuun, jossa ei ola ympyrää tai rastia. 
 Tätä toistetaan, kunnes ammus osuu laivaan. Tällöin pistetään ruutu muistiin: seuraavalla vuorolla ammutaan satunnaiseen vieressä olevaan ruutuun.  
 Jos ammus menee tällä kertaa ohi, ammutaan tätä seuraavalla vuorolla toiseen ruutuun, joka on alkuperäisen ruudun vierellä (ja jossa ei ole ympyrää tai rastia).
-Jos ammus osui, merkitään tämä toinen ruutu myös muistiin: nyt, seuraavalla kerralla ammutaan jompaankumpaan ruutuun, joka on kahden merkityn  ruudun 		 muodostaman "ruutuviivan" päässä. Jos ammus menee ohi, ammu seuravaaksi toiseen näistä ruuduista - nyt ammus osuu ja ammutaan aina vain seuraavaan ruutuun "ruutulinjalla", kunnes laiva tuhoutuu, ja palataan alkuperäiseen strategiaan (ammu satunnaiseen ruutuun, jossa ei ole ympyrää tai rastia).
+Jos ammus osui, merkitään tämä toinen ruutu myös muistiin: nyt, seuraavalla kerralla ammutaan jompaankumpaan ruutuun, joka on kahden merkityn  ruudun
+muodostaman "ruutuviivan" päässä. Jos ammus menee ohi, ammu seuravaaksi toiseen näistä ruuduista - nyt ammus osuu ja ammutaan aina vain seuraavaan ruutuun "ruutulinjalla", kunnes laiva tuhoutuu, ja palataan alkuperäiseen strategiaan (ammu satunnaiseen ruutuun, jossa ei ole ympyrää tai rastia).
 
 Pelisä on graaffinen käyttöliittymä (10x10 ruudukko), johon ilmestyy rastit ja ympyrät. Ammuttava ruutu valitaan hiirenpainalluksella.
