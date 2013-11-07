@@ -1,31 +1,47 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author peteukko
- */
 import java.util.ArrayList;
 
 public class Alus {
     
-   ArrayList<Ruutu> aluksenRuudut;
-   ArrayList<Ruutu> ammututRuudut;
-   
-   private int aluksenTyyppi;
+   ArrayList<Ruutu> Alus;
+   private int suuruus;
+   private String nimi;
     
-   public Alus(ArrayList<Ruutu> ruutuLista) {
-       
-       this.aluksenRuudut = ruutuLista;
-       
-       aluksenTyyppi = aluksenRuudut.size();
-
+   public Alus(int suuruus, String nimi) {
+       this.Alus = new ArrayList<Ruutu>();
+       this.suuruus = suuruus;
+       this.nimi = nimi;
+   }
+   
+   // Ensimmäinen toteutus: Vain Yhden ruudun aluksia (myöhemmin tulee ongelma, miten aluksen orientaatio toteutetaan)
+   public void asetaAlus(Ruutu lahtoRuutu) {
+       //Ruutu lahtoRuutu = new Ruutu(x, y);
+       Alus.add(lahtoRuutu);
+       lahtoRuutu.alusRuutuun();
    }
    
    public void tuhoaRuutu(Ruutu ruutu) {
-       ammututRuudut.add(ruutu);
+       Alus.remove(ruutu);
+   }
+   
+   public String toString() {
+       if (Alus.isEmpty()) {
+           return nimi + ", koko: " +suuruus + ", TUHOUTUNUT!";
+       } else {
+            return nimi + ", koko: " +suuruus + ", ruutuja jaljella: " +Alus.size();
+       }
+   }
+   
+   public int montakoRuutuaJaljella() {
+       return Alus.size();
+   }
+   
+   public boolean onkoTuhoutunut() {
+       if (Alus.isEmpty()) {
+           return true;
+       } else {
+           return false;
+       }
    }
 
 }
