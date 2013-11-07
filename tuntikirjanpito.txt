@@ -1,1 +1,3 @@
 31.10:  3h. Gitin opetellu ja setup koulussa ja kotona, ohjelman aihem‰‰rittely, hieman java-kertausta
+6.11: 3h, Kertausta (ohpe+ohja), pelin suunnittelua
+7.11: 4h, Kertausta, koodausta (Viikko 2)
