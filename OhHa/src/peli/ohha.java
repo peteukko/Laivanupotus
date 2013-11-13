@@ -1,3 +1,6 @@
+package peli;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -16,6 +19,10 @@ public class ohha {
         Alus havittaja = new Alus(2,"Hävittäjä");
         Alus risteilija = new Alus(3,"Risteilijä");
         
+         ArrayList<Alus> alukset = new ArrayList<Alus>();
+         alukset.add(sukellusvene);
+         alukset.add(havittaja);
+         alukset.add(risteilija);
 
         // luodaan ruutuja
         Ruutu ekaRuutu = new Ruutu(2,3);
@@ -24,20 +31,12 @@ public class ohha {
         // asetetaan sukellusvene ekaan ruutuun
         sukellusvene.asetaAlus(ekaRuutu);
         
-        System.out.println(ekaRuutu);
-        System.out.println(tokaRuutu);
-        
-        // Yritetään ampua alukseen
-        sukellusvene.tuhoaRuutu(tokaRuutu);
-        System.out.println(sukellusvene);
-        
-        // Huti, yritetään uudestaan:
-        sukellusvene.tuhoaRuutu(ekaRuutu);
-        System.out.println(sukellusvene);
-        
-       
+        for(Alus laiva:alukset) {
+            
+        }
         
         
+      
     }
     
     
@@ -50,7 +49,7 @@ public class ohha {
         } 
     }
     
-    public void ammu(Ruutu ruutu) {
-        
-    }
+    public void Ammu(int x, int y) {
+       
+   }
 }

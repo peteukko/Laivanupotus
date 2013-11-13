@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import peli.Ruutu;
+import peli.Alus;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
