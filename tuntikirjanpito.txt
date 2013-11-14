@@ -1,3 +1,8 @@
 31.10:  3h. Gitin opetellu ja setup koulussa ja kotona, ohjelman aihem‰‰rittely, hieman java-kertausta
 6.11: 3h, Kertausta (ohpe+ohja), pelin suunnittelua
 7.11: 4h, Kertausta, koodausta (Viikko 2)
+
+14.11: 1h, Toteutuksen miettimist‰
+15.11: 6h, Toteutus hieman uusiksi : peliss‰ ei ole tyhji‰ ruutuja, ainoastaan aluksilla on ruudut. Koodaus.
+Noin 2 tuntia meni ‰rsytt‰v‰n ConcurrentModificationException  -virheen ihmettelyyn. Miksi en heti googlannut.
+Ollut koko viikon sairaana, joten t‰ll‰ viikolla en edennyt niin paljon kuin halusin. Ensi viikolla enemm‰n.

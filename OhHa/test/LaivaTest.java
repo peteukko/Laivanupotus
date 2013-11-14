@@ -6,6 +6,7 @@
 
 import peli.Ruutu;
 import peli.Alus;
+import peli.Laivue;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +20,7 @@ import static org.junit.Assert.*;
  */
 public class LaivaTest {
     
+    Laivue testilaivue;
     Alus testialus;
     Ruutu ekaRuutu;
     Ruutu tokaRuutu;
@@ -40,57 +42,48 @@ public class LaivaTest {
     @Before
     public void setUp() {
         testialus = new Alus(3,"Testialus");
-        
-        //luodaan ruutuja
-        ekaRuutu = new Ruutu(2,3);
-        tokaRuutu = new Ruutu(5,7);
+        testilaivue = new Laivue("Kapteeni Koukku");
     }
     
     @After
     public void tearDown() {
     }
 
-    
    @Test
-   public void ruutuTyhjaEnnenAsetusta() {
-      assertFalse(ekaRuutu.onkoTassaAlusta());
+   public void LaivuuellaOnKolmeAlusta() {
+       assertEquals(testilaivue.montakoAlusta(),3);   
    }
    
+
    @Test
-   public void ruutuEiTyhjaAsetuksenJalkeen() {
-      testialus.asetaAlus(ekaRuutu);
-      assertTrue(ekaRuutu.onkoTassaAlusta());
-   }
-   
-   @Test
-   public void ruutuTietaaJosSiihenAmmuttuEnnenAmpumista() {
-      assertFalse(ekaRuutu.onkoTahanAmmuttu());
-   }
-   
-   @Test
-   public void ruutuTietaaJosSiihenAmmuttuAmpumisenJalkeen() {
-      ekaRuutu.ammuRuutuun();
-      assertTrue(ekaRuutu.onkoTahanAmmuttu());
-   }
-   
-   @Test
-   public void aluksellaYksiRuutuAlunPerin() {
-       testialus.asetaAlus(ekaRuutu);
+   public void alusOliollaAlunPerinYksiRuutu() {
        assertEquals(testialus.montakoRuutuaJaljella(),1);
    }
    
    @Test
-   public void alusVoiHyvinAlunPerin() {
-       testialus.asetaAlus(ekaRuutu);
+   public void aluksenVoiAsettaaRuutuunJolloinSillaKaksiRuutua() {
+       testialus.asetaAlus(3, 3);
+       assertEquals(testialus.montakoRuutuaJaljella(),2);
+   }
+   
+   
+   @Test
+   public void alusVoiHyvinKunSeOnAsetettuLaudalle() {
+       testialus.asetaAlus(3, 3);
        assertFalse(testialus.onkoTuhoutunut());
    }
    
    @Test
-   public void alusTuhoutuuJosSenRuutuunAmmutaan() {
-      testialus.asetaAlus(ekaRuutu);
-      testialus.tuhoaRuutu(ekaRuutu);
-      assertTrue(testialus.onkoTuhoutunut());
+   public void alusTuhoutuuKunSenRuutuihinOnAmmuttu() {
+       testialus.asetaAlus(4, 4);
+       testialus.josAluksellaTamaRuutuTuhoaSe(4, 4);
+       assertTrue(testialus.onkoTuhoutunut());
+       
    }
+   
+  
+
+   
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
