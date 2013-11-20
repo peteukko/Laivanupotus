@@ -49,7 +49,7 @@ public class Main {
        // ja lisätään alukseen tämä Ruutu (alus itsessään on ArrayList ruuduista!)
        
        pertinLaivue.asetaLaivueenAlus(2, 5, 5);
-       pertinLaivue.asetaLaivueenAlus(3, 6, 6);
+      pertinLaivue.asetaLaivueenAlus(3, 6, 6);
        pertinLaivue.asetaLaivueenAlus(4, 11,11);
        
        System.out.println(pertinLaivue);
@@ -59,7 +59,12 @@ public class Main {
        Ammu(pertinLaivue,5,5);
        Ammu(pertinLaivue,6,6);
        System.out.println(pertinLaivue);
-            
+       
+       Ruutulista munRuudut = new Ruutulista("Lista");
+       Ruutu r1 = new Ruutu(2,4);
+    
+      
+        
     }
     
     public static void Ammu(Laivue vihollisenLaivue, int x, int y) {   

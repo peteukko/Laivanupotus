@@ -23,6 +23,14 @@ public class Ruutu {
         //onkoAmmuttu = false;
     }
     
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
     public void alusRuutuun() {
         //onkoAlusta = true;   
     }

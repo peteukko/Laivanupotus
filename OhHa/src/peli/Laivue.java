@@ -14,6 +14,10 @@ public class Laivue {
     
    ArrayList<Alus> Laivue;
     
+   ArrayList<Ruutu> sallitutRuudut;
+   // sallituissa ruuduissa alunperin 10 x 10
+   // kun alus asetetetaan, nämä ruudut eivät ole enää salittuja
+   // Ruudut.remove
     
    private String kapteeni;
     
