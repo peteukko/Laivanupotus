@@ -55,17 +55,6 @@ public class LaivaTest {
    }
    
 
-   @Test
-   public void alusOliollaAlunPerinYksiRuutu() {
-       assertEquals(testialus.montakoRuutuaJaljella(),1);
-   }
-   
-   @Test
-   public void aluksenVoiAsettaaRuutuunJolloinSillaKaksiRuutua() {
-       testialus.asetaAlus(3, 3);
-       assertEquals(testialus.montakoRuutuaJaljella(),2);
-   }
-   
    
    @Test
    public void alusVoiHyvinKunSeOnAsetettuLaudalle() {

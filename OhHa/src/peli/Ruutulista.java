@@ -8,46 +8,58 @@ import java.util.ArrayList;
 
 public class Ruutulista {
 
-    public String nimi;
-    ArrayList<Ruutu> Ruutulista;
+    protected String nimi;
+    ArrayList<Ruutu> ruutulista;
 
     public Ruutulista() {
-        this.Ruutulista = new ArrayList<Ruutu>();
+        this.ruutulista = new ArrayList<Ruutu>();
     }
     
     public Ruutulista(String nimi) {
-        this.Ruutulista = new ArrayList<Ruutu>();
+        this.ruutulista = new ArrayList<Ruutu>();
         this.nimi = nimi;
-        
-        //Ruutu existentiaaliRuutu = new Ruutu(0, 0);
-        //Ruutulista.add(existentiaaliRuutu);
     }
 
     public void lisaaRuutu(int x, int y) {
         Ruutu uusiRuutu = new Ruutu(x, y);
-        Ruutulista.add(uusiRuutu);
+        ruutulista.add(uusiRuutu);
     }
 
     public void lisaaRuutuOlio(Ruutu lisattavaRuutu) {
-        Ruutulista.add(lisattavaRuutu);
+        ruutulista.add(lisattavaRuutu);
+    }
+    
+    //public void lisaaRuutuOlioLista(ArrayList<Ruutu> lisattavat) {
+    //    ruutulista.addAll(lisattavat);  
+    //}
+    
+    public void lisaaRuutulistaTahanRuutuListaan(Ruutulista ruudut) {
+        ruutulista.addAll(ruudut.ruutulista);
+
     }
 
     public void poistaRuutu(int x, int y) {
         ArrayList<Ruutu> tuhottava = new ArrayList<Ruutu>();
-        for (Ruutu ruutu : Ruutulista) {
+        for (Ruutu ruutu : ruutulista) {
             if (ruutu.matchaakoKoordinaatit(x, y)) {
                 tuhottava.add(ruutu);
             }
         }
-        Ruutulista.removeAll(tuhottava); 
+        ruutulista.removeAll(tuhottava); 
     }
     
     public void poistaRuutuOlio(Ruutu poistettavaRuutu) {
-        Ruutulista.remove(poistettavaRuutu);
+        ruutulista.remove(poistettavaRuutu);
     }
 
+    public void poistaArgumentinRuudutTastaRuutulistasta(Ruutulista ruudut) {
+        for (Ruutu ruutu : ruutulista) {
+            poistaRuutu(ruutu.getX(),ruutu.getY());
+        }
+    }
+    
     public int getRuutujenLkm() {
-        return Ruutulista.size();
+        return ruutulista.size();
     }
 
     public String getNimi() {
@@ -56,7 +68,7 @@ public class Ruutulista {
 
     public boolean onkoRuutuListalla(int x, int y) {
         boolean onkoListalla = false;
-        for (Ruutu yksiruutu : Ruutulista) {
+        for (Ruutu yksiruutu : ruutulista) {
             if (yksiruutu.matchaakoKoordinaatit(x, y)) {
                 onkoListalla = true;
             }
@@ -65,22 +77,24 @@ public class Ruutulista {
     }
 
     public boolean onkoRuutuOlioListalla(Ruutu ruutu) {
-        return Ruutulista.contains(ruutu);
+        return ruutulista.contains(ruutu);
     }
     
-    //public boolean onkoKaikkiRuudutTassaListassaMyosArgumentinListassa(ArrayList<Ruutu> ruudut) {
-     //   boolean totuus = true; 
-     //   for (Ruutu ruutu:ruudut) {
-     //       if R
-     //   }
-    //}
+    public boolean onkoKaikkiRuudutTassaListassaMyosArgumentinListassa(Ruutulista ruudut) {
+        boolean totuus = true; 
+        for (Ruutu ruutu:ruutulista) {
+            if (!ruudut.onkoRuutuListalla(ruutu.getX(), ruutu.getY())) {
+                totuus = false; 
+            }
+        } return totuus;
+    }
 
     public String toString() {
 
         String palautettava = "";
-        for (Ruutu ruutu : Ruutulista) {
+        for (Ruutu ruutu : ruutulista) {
             palautettava = palautettava + ruutu.toString() + " | ";
-        }
+        } 
         return palautettava;
     }
 

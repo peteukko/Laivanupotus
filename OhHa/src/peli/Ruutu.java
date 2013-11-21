@@ -31,31 +31,18 @@ public class Ruutu {
         return y;
     }
     
-    public void alusRuutuun() {
-        //onkoAlusta = true;   
-    }
-            
-    public void ammuRuutuun() {
-        //onkoAmmuttu = true; 
-    }
-    
-   //public boolean onkoTassaAlusta() {
-        //return onkoAlusta;
-    //}
-    
-    //public boolean onkoTahanAmmuttu() {
-        //return onkoAmmuttu;
-    //}
     
     public boolean matchaakoKoordinaatit(int x2, int y2) {
         return (x2 == x && y2 == y);
         
     }
     
+    public boolean matchaakoKoordinaatit(Ruutu verrattava) {
+        return (this.x == verrattava.x && this.y == verrattava.y);
+        
+    }
     
-            
-            
-    
+   
     
     public String toString() {
         return x+","+y;
