@@ -6,3 +6,13 @@
 15.11: 6h, Toteutus hieman uusiksi : pelissä ei ole tyhjiä ruutuja, ainoastaan aluksilla on ruudut. Koodaus.
 Noin 2 tuntia meni ärsyttävän ConcurrentModificationException  -virheen ihmettelyyn. Miksi en heti googlannut.
 Ollut koko viikon sairaana, joten tällä viikolla en edennyt niin paljon kuin halusin. Ensi viikolla enemmän.
+
+
+20.11: 3h Päänsärkyä: Miten aluksen asettaminen kannattaa toteutttaa..
+21.11: 5h ...uusi luokka: Ruutulista, jonka Alus-luokka extendaa. Pidetään listaa sallituista ruuduista (alunperin 10x10). 
+Kun alus asetetaan, pitää tarkistaa, ovatko kaikki ruudut, johon alus tulisi, sallittuja ruutuja. Aluksen asetus määriytyy
+"lähtöruudusta": esim (1,1) ja "suunnasta" (1-4) esim 1: länteen lähtöruudusta.
+Kun alus asetetaan johonkin ruutuun, tämä tulee poistaa sallituista ruuduista.
+Junit testeihin meni PALJON aikaa, halusin tehdä tämän hyvin.
+JavaDoc- Dokumentointi ensi kertaa
+22:11. 1h

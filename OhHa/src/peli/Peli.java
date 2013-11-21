@@ -6,6 +6,10 @@ import java.util.ArrayList;
  *
  * @Laivanupotuksen alfa 0.3
  *
+ * 21.11: EN IHAN EHTINYT kokeilla peliä tekstikäyttöliittymän kanssa, mutta 
+ * palikat ovat nyt hyvin pitkälti paikallaan! Tähän ei pitäisi mennä kauan, mutta en halunut
+ * tuhlata aikaa sen hosaamiseen, vaan haluan tehdä sen oikein alusta asti!
+ * 
  * Ajateltu toteutus: Pelissä on 2 pelaajaa, joilla molemmilla on Laivue.
  * Laivue-olio on Alus-olioista muodostuva ArrayList; eli Alus-kokoelma (esim 3
  * eri pituista alusta). Alus vuorostaan on Ruutu-olioista muodostuva ArrayList,
@@ -21,6 +25,8 @@ import java.util.ArrayList;
  * onko tähän ammuttu aiemmin ( pidetään esim int[][] ArrayList ruuduista) ja 2)
  * onko siinnä Alusta (onko ruutua olemassa).
  *
+ * 
+ * 
  * 
  */
 
