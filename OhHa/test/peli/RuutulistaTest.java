@@ -17,6 +17,10 @@ import static org.junit.Assert.*;
  */
 public class RuutulistaTest {
     
+    Ruutulista ekaLista;
+    Ruutulista tokaLista;
+    Ruutulista kolmasLista;
+    
     public RuutulistaTest() {
     }
     
@@ -30,60 +34,75 @@ public class RuutulistaTest {
     
     @Before
     public void setUp() {
+        ekaLista = new Ruutulista();
+        tokaLista = new Ruutulista();
+        tokaLista.lisaaRuutu(2, 2);
+        tokaLista.lisaaRuutu(3, 3);
+        tokaLista.lisaaRuutu(5, 5);
+           
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-    
+
     @Test
     public void ruutuListallaAlunPerinNollaRuutua() {
-        
+        assertEquals(ekaLista.getRuutujenLkm(),0);
     }
     
     @Test
     public void ruudunLisaaminenToimiiKoordinaateilla() {
-        
+        ekaLista.lisaaRuutu(3, 3);
+        assertEquals(ekaLista.getRuutujenLkm(),1);
     }
     
     @Test
     public void ruudunLisaaminenToimiiOliolla() {
-        
+        ekaLista.lisaaRuutuOlio(new Ruutu(3,3));
+        assertEquals(ekaLista.getRuutujenLkm(),1);
     }
     
     @Test
     public void useammanRuudunLisaaminenToimii() {
-        
+        ekaLista.lisaaRuutulistaTahanRuutuListaan(tokaLista);
+        assertEquals(ekaLista.getRuutujenLkm(),3);
     }
     
     @Test
     public void ruudunPoistaminenKoordinaateillaToimii() {
-        
+        ekaLista.lisaaRuutu(3, 4);
+        ekaLista.poistaRuutu(3, 4);
+        assertEquals(ekaLista.getRuutujenLkm(),0);
     }
     
     @Test
     public void useammanRuudunPoistaminenToimii() {
+        ekaLista.lisaaRuutu(2,2);
+        ekaLista.lisaaRuutu(3,3);
+        tokaLista.poistaArgumentinRuudutTastaRuutulistasta(ekaLista);
+        assertEquals(tokaLista.getRuutujenLkm(),1);
         
     }
     
     @Test
     public void onkoRuutuListassaToimii() {
-        
+        ekaLista.lisaaRuutu(1,1);
+        assertTrue(ekaLista.onkoRuutuListalla(1, 1));
     }
     
     @Test
-    public void onkoTietytRuudutKaikkiListassaToimiiJosOn() {
-        
+    public void toimiikoOnkoListanRuudutToisessaListassaJosOn() {
+        ekaLista.lisaaRuutu(2, 2);
+        ekaLista.lisaaRuutu(3, 3);
+        assertTrue(ekaLista.onkoKaikkiRuudutTassaListassaMyosArgumentinListassa(tokaLista));
     }
     
     @Test
-    public void onkoTietytRuudutKaikkiListassaToimiiJosPoikkeama() {
-        
+    public void toimiikoOnkoListanRuudutToisessaListassaJosPoikkeama() {
+        ekaLista.lisaaRuutu(2, 2);
+        ekaLista.lisaaRuutu(3, 4);
+        assertFalse(ekaLista.onkoKaikkiRuudutTassaListassaMyosArgumentinListassa(tokaLista));
     }
     
     

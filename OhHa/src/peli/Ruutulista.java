@@ -1,4 +1,4 @@
-/*
+/**
  * Ruutulista on Ruuduista muodostuva ArrayList-olio. Ruutuja voi lisätä ja poistaa
  */
 package peli;
@@ -29,10 +29,7 @@ public class Ruutulista {
         ruutulista.add(lisattavaRuutu);
     }
     
-    //public void lisaaRuutuOlioLista(ArrayList<Ruutu> lisattavat) {
-    //    ruutulista.addAll(lisattavat);  
-    //}
-    
+
     public void lisaaRuutulistaTahanRuutuListaan(Ruutulista ruudut) {
         ruutulista.addAll(ruudut.ruutulista);
 
@@ -53,8 +50,8 @@ public class Ruutulista {
     }
 
     public void poistaArgumentinRuudutTastaRuutulistasta(Ruutulista ruudut) {
-        for (Ruutu ruutu : ruutulista) {
-            poistaRuutu(ruutu.getX(),ruutu.getY());
+        for (Ruutu ruutu:ruudut.ruutulista) {
+            this.poistaRuutu(ruutu.getX(), ruutu.getY());
         }
     }
     

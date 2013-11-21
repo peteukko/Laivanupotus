@@ -3,50 +3,61 @@ package peli;
 import java.util.ArrayList;
 
 public class Alus extends Ruutulista {
- 
 
     private int pituus;
-    //private String nimi;
 
     public Alus(int pituus, String nimi) {
         super(nimi);
         this.pituus = pituus;
-        
+
         // Asetetaan "nollaruutu" joten Alus-olio ei ole koskaan tyhjä (voi kenties tulla ongelmia)
         Ruutu existentiaaliRuutu = new Ruutu(0, 0);
-        this.lisaaRuutuOlio(existentiaaliRuutu); 
-
+        this.lisaaRuutuOlio(existentiaaliRuutu);
     }
 
-    // Ensimmäinen toteutus: Vain Yhden ruudun aluksia (myöhemmin tulee kysymys, miten aluksen orientaatio toteutetaan)
+    /**
+     * Aluksen Asettaminen, eka toteutus: ainoastaan yksi ruutu
+     *
+     * @param x x-koordinaatti
+     * @param y y-kordinaatti
+     */
     public void asetaAlus(int x, int y) {
         super.lisaaRuutu(x, y);
     }
 
-    // Toinen versio: Alus asetetaan ruutuihin, jonka määrittää ruutujen määrä (aluksen pituus)
-    // ja int suunta: 1 = lähtöruudusta itään, 2 = etelään, 3 = länteen, 4 = pohjoiseen
-    // metodi palauttaa true jos aluksen asetus onnistuu (alus ei mee laudan ulkopuolelle jne)
-    // Alus voidaan vain asettaa ruutuihin, jossa ei jo ole alusta, ja joka on pelilaudan sisällä.
-    // Pidetään listaa kevollisista ruuduista : Ruutulista sallitut otetaan argumenttina metodiin.
-    public Ruutulista asetaAlusKunnolla(int x, int y, int suunta, Ruutulista sallitut) {
+    /**
+     * Aluksen Asettaminen kunnolla: Alus asetetaan ruutuihin, jotka määriytyy
+     * "lähtöruudusta", ruutujen määrästä (aluksen pituus) ja suunnasta. Alus
+     * voidaan vain asettaa ruutuihin, jossa ei jo ole alusta, ja joka on
+     * pelilaudan sisällä. // Pidetään listaa kevollisista ruuduista :
+     * Ruutulista sallitut otetaan argumenttina metodiin.
+     *
+     * @param x x-koordinaatti
+     * @param y y-kordinaatti
+     * @param suunta 1 = lähtöruudusta itään, 2 = etelään, 
+     * 3 = länteen, 4 = pohjoiseen.
+     * @param sallitut Pidetään listaa kevollisista ruuduista, jota muokataan metodissa
+     * @return onnistuuko oliko kaikki ruudut kelvollisia, onnistuiko aluksen sijoitus.
+     */
+    public boolean asetaAlusKunnolla(int x, int y, int suunta, Ruutulista sallitut) {
         //Ruutu lahtoRuutu = new Ruutu(x, y);
         Ruutulista lisattavat = new Ruutulista();
 
         if (suunta == 1) {
             for (int i = 0; i < pituus; i++) {
-                lisattavat.lisaaRuutuOlio(new Ruutu(x + i, y));
+                lisattavat.lisaaRuutuOlio(new Ruutu((x + i), y));
             }
         } else if (suunta == 2) {
             for (int i = 0; i < pituus; i++) {
-                lisattavat.lisaaRuutuOlio(new Ruutu(x, y + i));
+                lisattavat.lisaaRuutuOlio(new Ruutu(x, (y + i)));
             }
         } else if (suunta == 3) {
             for (int i = 0; i < pituus; i++) {
-                lisattavat.lisaaRuutuOlio(new Ruutu(x - i, y));
+                lisattavat.lisaaRuutuOlio(new Ruutu((x - i), y));
             }
         } else if (suunta == 4) {
             for (int i = 0; i < pituus; i++) {
-                lisattavat.lisaaRuutuOlio(new Ruutu(x, y - i));
+                lisattavat.lisaaRuutuOlio(new Ruutu(x, (y - i)));
             }
         }
 
@@ -56,20 +67,16 @@ public class Alus extends Ruutulista {
             sallitut.poistaArgumentinRuudutTastaRuutulistasta(lisattavat);
 
         }
-        return sallitut;
+        return onnistuuko;
 
     }
 
-    //  if kelvollisetRuudut.includes.laitettavat
-    //
-    //
     public void poistaRuutu(Ruutu ruutu) {
-        //Alus.remove(ruutu);
         super.poistaRuutuOlio(ruutu);
     }
 
     public String toString() {
-        if (super.getRuutujenLkm() == 1) {
+        if (this.onkoTuhoutunut()) {
             return nimi + ", koko: " + pituus + ", TUHOUTUNUT!";
         } else {
             String palautettava = "";
@@ -82,25 +89,26 @@ public class Alus extends Ruutulista {
         }
     }
 
-    //public int montakoRuutuaJaljella() {
-    //  super.getRuutujenLkm();
-    //return Alus.size();
-    //}
-    public void josAluksellaTamaRuutuTuhoaSe(int x, int y) {
+    /**
+     * Metodi poistaa syotteen koordinaatteja vastaavan ruudun jos Alus oliolla
+     * sellainen on
+     *
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     *
+     * @return boolean loytyiko eli poistettiinko ruutu
+     */
+    public boolean josAluksellaTamaRuutuTuhoaSe(int x, int y) {
 
-        // ArrayList<Ruutu> tuhottava = new ArrayList<Ruutu>();
+        boolean osuiko = super.onkoRuutuListalla(x, y);
         super.poistaRuutu(x, y);
-        // for (Ruutu ruutu : Alus) {
-//
-        //          if (ruutu.matchaakoKoordinaatit(x, y)) {
-        //            tuhottava.add(ruutu);
-
-        //          }
-//
-        //    }
-        //  Alus.removeAll(tuhottava);
+        return osuiko;
     }
-
+    
+    /** Kertoo jos alus on tuhoutunut eli ruutuja 1 kpl (existentiaaliruutu)
+     * 
+     * @return true = tuhoutunut
+     */
     public boolean onkoTuhoutunut() {
         if (super.getRuutujenLkm() == 1) {
             return true;

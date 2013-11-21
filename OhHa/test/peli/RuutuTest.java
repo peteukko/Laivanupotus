@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import peli.Ruutu;
 
 /**
  *
@@ -37,11 +36,6 @@ public class RuutuTest {
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 
     @Test
     public void matchaakoKoordinaatitToimiiJosSamat() {
