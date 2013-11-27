@@ -1,7 +1,7 @@
-
 package peli;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -10,13 +10,11 @@ import java.util.ArrayList;
 public class Laivue {
 
     ArrayList<Alus> Laivue;
-
     /**
-     * sallituissa ruuduissa alunperin 10 x 10. Kun alus sijoitetaan johonkin 
+     * sallituissa ruuduissa alunperin 10 x 10. Kun alus sijoitetaan johonkin
      * ruutuihin, nämä ruudut eivät ole enää salittuja
      */
     Ruutulista sallitutRuudut;
-
     private String kapteeni;
 
     public Laivue(String kapteeni) {
@@ -43,19 +41,58 @@ public class Laivue {
 
     }
 
-   /**
-    * Aseta laivueen aluksenNumero-numeroa vastaava alus (1: ensimmäinen eli 
-    * sukellusvene) lähtöruudusta (x,y) suuntaan (int suunta = 1:4) määrittämiin
-    * ruutuihin
-    * @param aluksenNumero
-    * @param x
-    * @param y
-    * @param suunta
-    * @return onnistuiko aluksen asettaminen 
-    */
+    /**
+     * Aseta laivueen aluksenNumero-numeroa vastaava alus (1: ensimmäinen eli
+     * sukellusvene) lähtöruudusta (x,y) suuntaan (int suunta = 1:4)
+     * määrittämiin ruutuihin
+     *
+     * @param aluksenNumero
+     * @param x
+     * @param y
+     * @param suunta
+     * @return onnistuiko aluksen asettaminen
+     */
     public boolean asetaLaivueenAlus(int aluksenNumero, int x, int y, int suunta) {
-        boolean onnistuiko = Laivue.get(aluksenNumero-1).asetaAlusKunnolla(x, y, suunta, sallitutRuudut);
+        boolean onnistuiko = Laivue.get(aluksenNumero - 1).asetaAlusKunnolla(x, y, suunta, sallitutRuudut);
         return onnistuiko;
+    }
+
+    /**
+     * Asettaa laivueen int aluksenNumero-vastaavan aluksen satunnaisesti
+     * pelilaudalle. Arpoo (x,y) -koordinaattiparin ja int suunnan ja käyttää
+     * sitten metodia asetaLaivueenAlus asettaakseen aluksen näiden mukaisesti.
+     * Jos ei onnistu,arpoo uudet ja toistaa, kunnes onnistuu. Tätä metodia voi
+     * käyttää testaamiseen ja myöhemmin tekoälyn käytettäväksi
+     *
+     * @param aluksenNumero
+     */
+    public void asetaAlusSatunnaisesti(int aluksenNumero) {
+        Random arpoja = new Random();
+
+        
+        while (true) {
+            int x = 1 + arpoja.nextInt(10);
+            int y = 1 + arpoja.nextInt(10);
+            int suunta = 1 + arpoja.nextInt(4);;
+            boolean onnistuiko = asetaLaivueenAlus(aluksenNumero, x, y, suunta);
+
+            if (onnistuiko) {
+                break;
+            }
+        }
+
+
+    }
+
+    /**
+     * Käyttää metodia asetaAlusSatunnaisesti asettaakseen koko laivueen.
+     */
+    public void asetaLaivueSatunnaisesti() {
+        for (int i = 1; i <= Laivue.size(); i++) {
+            //System.out.println(i);
+            asetaAlusSatunnaisesti(i);
+            System.out.println(i);
+        }
     }
 
     public int montakoAlusta() {
@@ -68,6 +105,7 @@ public class Laivue {
 
     /**
      * Ammu ruutuun (x,y)
+     *
      * @param x
      * @param y
      * @return osuiko vihollisen alukseen
@@ -80,16 +118,18 @@ public class Laivue {
                 osuiko = true;
                 System.out.println("PAM!!!!");
             }
-        } return osuiko;
+        }
+        return osuiko;
     }
-    
+
     public boolean onkoAluksiaJaljella() {
-        boolean onkoAluksiaJaljella = false; 
-        for (Alus alus: Laivue) {
+        boolean onkoAluksiaJaljella = false;
+        for (Alus alus : Laivue) {
             if (!alus.onkoTuhoutunut()) {
                 onkoAluksiaJaljella = true;
             }
-        } return onkoAluksiaJaljella;
+        }
+        return onkoAluksiaJaljella;
     }
 
     public String toString() {
@@ -101,7 +141,6 @@ public class Laivue {
     }
 
     public Alus getAlus(int aluksenNumero) {
-        return Laivue.get(aluksenNumero-1);
+        return Laivue.get(aluksenNumero - 1);
     }
-
 }

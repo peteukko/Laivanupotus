@@ -1,5 +1,6 @@
 package peli.ui;
 
+import peli.Laivue;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import java.awt.Container;
@@ -17,6 +18,11 @@ import javax.swing.JPanel;
 public class Graafinenkayttoliittyma implements Runnable {
 
     private JFrame frame;
+    private Laivue laivue;
+    
+    public Graafinenkayttoliittyma(Laivue laivue) {
+        this.laivue = laivue;
+    }
 
     @Override
     public void run() {
@@ -47,7 +53,7 @@ public class Graafinenkayttoliittyma implements Runnable {
         for (int x = 1; x <= 10; x++) {
             for (int y = 1; y <= 10; y++) {
                 JButton uusnappi = new JButton("o");
-                napinKuuntelija kuuntelija = new napinKuuntelija(x, y, uusnappi);
+                RuudunPainallusKuuntelija kuuntelija = new RuudunPainallusKuuntelija(x, y, uusnappi, laivue);
                 uusnappi.addActionListener(kuuntelija);
                 
                 panel.add(uusnappi);

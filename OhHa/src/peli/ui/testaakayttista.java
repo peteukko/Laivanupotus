@@ -6,6 +6,7 @@
 
 package peli.ui;
 
+import peli.Laivue;
 import javax.swing.SwingUtilities;
 
 /**
@@ -19,7 +20,18 @@ public class testaakayttista {
      */
     public static void main(String[] args) {
         
-        Graafinenkayttoliittyma graafinen = new Graafinenkayttoliittyma();
+        Laivue laivue = new Laivue("Testi");
+        //System.out.println(laivue.montakoAlusta());
+        //System.out.println(laivue);
+        //laivue.asetaLaivueenAlus(1, 3, 3, 1);
+        //System.out.println(laivue);
+      
+        //laivue.asetaAlusSatunnaisesti(3);
+        laivue.asetaLaivueSatunnaisesti();
+        
+        //System.out.println(laivue);
+        
+        Graafinenkayttoliittyma graafinen = new Graafinenkayttoliittyma(laivue);
         SwingUtilities.invokeLater(graafinen);
     }
     
