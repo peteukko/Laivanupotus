@@ -27,6 +27,7 @@ public class Laivue {
         this.Laivue = new ArrayList<Alus>();
         this.kapteeni = kapteeni;
         this.sallitutRuudut = new Ruutulista();
+        this.ammututRuudut = new Ruutulista();
 
         Alus sukellusvene = new Alus(1, "Sukellusvene");
         Alus havittaja = new Alus(2, "Hävittäjä");
