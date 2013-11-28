@@ -76,17 +76,30 @@ public class Alus extends Ruutulista {
     }
 
     public String toString() {
+        String palautettava = nimi + ": " + aluksenTila();
         if (this.onkoTuhoutunut()) {
-            return nimi + ", koko: " + pituus + ", TUHOUTUNUT!";
-        } else {
-            String palautettava = "";
-            palautettava = palautettava + nimi + ", koko: " + pituus + ", ruutuja jaljella: " + (super.getRuutujenLkm() - 1)
-                    + "\n Ruutujen koordinaatit: ";
-            //for (Ruutu aluksenruutu:Alus) {
-            //    palautettava = palautettava + aluksenruutu.toString() + " | ";
-            //}
-            return palautettava + super.toString();
+            return palautettava + "\n TUHOUTUNUT!";
+        } else {          
+            return palautettava; 
         }
+    }
+    
+    /**
+     * Palauttaa stringin, jossa aluksen "hit pointit" näkyy ruutuina. 
+     * esim   [ ] [ ] [x]   = 3 ruudun alus, joka on ottanut yhden osuman.
+     * @return 
+     */
+    public String aluksenTila() {
+        String tila = "";
+        
+        int tuhoutuneetRuudut = pituus - (super.getRuutujenLkm() -1);
+        for (int i = 1; i <= (pituus-tuhoutuneetRuudut);i++) {
+            tila = tila + "[ ]  ";
+        }
+        for (int i = 1; i <= tuhoutuneetRuudut; i++) {
+            tila = tila + "[x]  ";
+        }
+        return tila;
     }
 
     /**

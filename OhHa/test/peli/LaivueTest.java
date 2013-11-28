@@ -67,6 +67,14 @@ public class LaivueTest {
         teponLaivue.asetaLaivueenAlus(2, 5, 5, 1); // -> ruudut (5,5), (6,5)
     }
     
+    @Test
+    public void kokolaivueenVoiAsettaaSatunnaieesti() {
+        
+        teponLaivue.asetaLaivueSatunnaisesti();
+        assertEquals(teponLaivue.sallitutRuudut.getRuutujenLkm(), 85);
+        
+    }
+    
     
     
 }

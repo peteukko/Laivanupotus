@@ -1,19 +1,13 @@
 package peli.ui;
 
 import peli.Laivue;
-import java.util.ArrayList;
-import javax.swing.JLabel;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.JPanel;
+
 
 public class Graafinenkayttoliittyma implements Runnable {
 
@@ -29,28 +23,32 @@ public class Graafinenkayttoliittyma implements Runnable {
 
     @Override
     public void run() {
-        frame = new JFrame("LAIVANUPOTUS V0.1 ");
-        frame.setPreferredSize(new Dimension(1000, 500));
-        //frame.setLocation(500, 300);
+        frame = new JFrame("LAIVANUPOTUS V0.5 ");
+        frame.setPreferredSize(new Dimension(1200, 500));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
         
-        //frame2 = new JFrame("Pelaaja 2:n territorio");
-        //frame2.setPreferredSize(new Dimension(600, 600));
-        //frame2.setLocation(1200,300);
-        //frame2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //luoKomponentit(frame2.getContentPane(), Laivue p);
-        //frame2.pack();
-        //frame2.setVisible(true);
 
     }
     
-    public void luoKomponentit(Container container) {
-        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-        container.add(new PeliAlusta(pelaaja1Laivue));
-        container.add(new PeliAlusta(pelaaja2Laivue));
+    
+    /**
+     * Luo graafisen käyttöliittymän komponentit ja settaa ne x-suunnassa 
+     * (boxlayout) : Vasemmalla Pelaaja 1 sen pelialusta, keskellä tilannekatsaukset
+     * (JTextArea), oikealla pelaaja 2:sen pelialusta.
+     * @param container 
+     */
+    private void luoKomponentit(Container container) {
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS)); 
+        JTextArea pelaaja1tilanne = new JTextArea(pelaaja1Laivue.toString());
+        
+        container.add(new PeliAlusta(pelaaja1Laivue, pelaaja1tilanne));
+        container.add(pelaaja1tilanne);
+        JTextArea pelaaja2tilanne = new JTextArea(pelaaja2Laivue.toString());
+        container.add(pelaaja2tilanne);
+        container.add(new PeliAlusta(pelaaja2Laivue, pelaaja2tilanne));
     }
 
 

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Laivue luokka. Laivue on ArrayList Aluksista! Laivueella on kapteeni (String
+ * kapteeni) ja lista ruuduista, johon laivueen aluksia voi asettaa. Alunperin
+ * koko pelilauta, mutta päivittyy asettamisen mukaan (laivoja ei voi laittaa
+ * päällekäin)
  *
  * @author Pepe
  */
@@ -15,6 +19,8 @@ public class Laivue {
      * ruutuihin, nämä ruudut eivät ole enää salittuja
      */
     Ruutulista sallitutRuudut;
+    Ruutulista ammututRuudut;
+    
     private String kapteeni;
 
     public Laivue(String kapteeni) {
@@ -69,7 +75,6 @@ public class Laivue {
     public void asetaAlusSatunnaisesti(int aluksenNumero) {
         Random arpoja = new Random();
 
-        
         while (true) {
             int x = 1 + arpoja.nextInt(10);
             int y = 1 + arpoja.nextInt(10);
@@ -81,7 +86,6 @@ public class Laivue {
             }
         }
 
-
     }
 
     /**
@@ -91,7 +95,7 @@ public class Laivue {
         for (int i = 1; i <= Laivue.size(); i++) {
             //System.out.println(i);
             asetaAlusSatunnaisesti(i);
-            
+
         }
     }
 
@@ -105,13 +109,19 @@ public class Laivue {
 
     /**
      * Ammu ruutuun (x,y)
-     *
+     * Menee läpi laivueen kaikki ruudut ja katsoo jos koordinaatit matchaa
+     * mitään näistä ruuduista. Jos näin on, tuhoaa aluksen tämän ruudun, ja
+     * tulostaa "PAM!!" 
+     * 
      * @param x
      * @param y
      * @return osuiko vihollisen alukseen
      */
     public boolean yritaAmpuaLaivueeseen(int x, int y) {
         boolean osuiko = false;
+        
+        ammututRuudut.lisaaRuutu(x, y);
+
         for (Alus alus : Laivue) {
             boolean loytyykoruutu = alus.josAluksellaTamaRuutuTuhoaSe(x, y);
             if (loytyykoruutu) {
@@ -122,6 +132,12 @@ public class Laivue {
         return osuiko;
     }
 
+    
+    /**
+     * Menee läpi kaikki laivueen alukset. Jos kaikki ovat tuhoutuneet, palauttaa
+     * false
+     * @return true, jos edes 1 alus on vielä pystyssä 
+     */
     public boolean onkoAluksiaJaljella() {
         boolean onkoAluksiaJaljella = false;
         for (Alus alus : Laivue) {
