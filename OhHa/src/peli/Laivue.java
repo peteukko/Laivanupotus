@@ -91,7 +91,7 @@ public class Laivue {
         for (int i = 1; i <= Laivue.size(); i++) {
             //System.out.println(i);
             asetaAlusSatunnaisesti(i);
-            System.out.println(i);
+            
         }
     }
 

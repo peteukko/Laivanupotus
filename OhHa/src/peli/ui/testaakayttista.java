@@ -20,18 +20,20 @@ public class testaakayttista {
      */
     public static void main(String[] args) {
         
-        Laivue laivue = new Laivue("Testi");
+        Laivue laivue1 = new Laivue("USS Enterprise");
+        Laivue laivue2 = new Laivue("Kapteeni Koukku");
         //System.out.println(laivue.montakoAlusta());
         //System.out.println(laivue);
         //laivue.asetaLaivueenAlus(1, 3, 3, 1);
         //System.out.println(laivue);
       
         //laivue.asetaAlusSatunnaisesti(3);
-        laivue.asetaLaivueSatunnaisesti();
+        laivue1.asetaLaivueSatunnaisesti();
+        laivue2.asetaLaivueSatunnaisesti();
         
         //System.out.println(laivue);
         
-        Graafinenkayttoliittyma graafinen = new Graafinenkayttoliittyma(laivue);
+        Graafinenkayttoliittyma graafinen = new Graafinenkayttoliittyma(laivue1, laivue2);
         SwingUtilities.invokeLater(graafinen);
     }
     
