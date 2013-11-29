@@ -16,3 +16,13 @@ Kun alus asetetaan johonkin ruutuun, t‰m‰ tulee poistaa sallituista ruuduista.
 Junit testeihin meni PALJON aikaa, halusin tehd‰ t‰m‰n hyvin.
 JavaDoc- Dokumentointi ensi kertaa
 22:11. 1h
+
+
+
+26.11: 2h Graafisen k‰yttˆliittym‰n aloittaminen: OhJa matskun l‰pik‰ynti‰
+27.11: 4h -==- koodin aloittaminen...10x10 Gridlayout. Jokaiseen ruutuun tehd‰‰n kuuntelija, joka p‰ivitt‰‰ muuttaa ruudun ulkon‰kˆ‰ jos siihen am mutaan
+28.11:  5h graafisen jatkaminen : nyt perusteet ovat kasassa. Viel‰ puuttuu pelin vuoro-aspekti. (ja teko‰ly, jos siihen j‰‰ aikaa). sek‰ aluksien manuaalinen asettelu
+Graafisen UI:n kautta, mutta t‰h‰n eit ulisi menn‰ paljon aikaa.
+Pari testi‰ lis‰‰..
+Dokumentointi..
+29:11. Sori, taas v‰h‰n venysi. Hemmetin sekvenssiokaaviot, en ota niist‰ tolkkua

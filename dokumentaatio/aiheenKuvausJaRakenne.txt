@@ -1,12 +1,13 @@
 Laivanupotus. Peliä pelataan 10x10 ruudukolla, ja pelaajia on kaksi: joko kaksi käyttäjää, tai yksi käyttäjä vastaan tietokone. 
 Ruudukkoja on kaksi, yksi molemmalle pelaajalle. Peli aloitetaan asttemalla 5 eri pituista (1-5 ruutua) laivaa omalle ruudukolle 
 pysty- tai vaakaasennossa.
+
 Pidetään listaa sallituista ruuduista johon laivan voi asettaa (alunperin 10x10), koska alukset eivät voi mennä päällekkäin. 
 Kun alus asetetaan, pitää tarkistaa, ovatko kaikki ruudut, johon alus tulisi, sallittuja ruutuja. Aluksen asetus määriytyy
 "lähtöruudusta": esim (1,1) ja "suunnasta" (1-4) esim 1: länteen lähtöruudusta.
 Kun alus asetetaan johonkin ruutuun, tämä tulee poistaa sallituista ruuduista.
 
-Pelaajat eivät nää toistensa laivoja. 
+
 Peliä pelataan vuorottain: Arvataan jokin ruutu, johon ammutaan vastustajan laudalla. Ruutuun tulee tällöin aina merkintä: 
 rasti, jos ammus osui laivaan, ja ympyrä, jos ammus ei osunnut laivaan. Jos ammus osuu laivaan, pelaaja saa lisävuoron. 
 Alus tuhoutuu, kun jokaiseen sen täyttämään ruutuun on ammuttu. Alus merkitään tällöin tuhoutuneeksi. 
@@ -19,4 +20,7 @@ Jos ammus osui, merkitään tämä toinen ruutu myös muistiin: nyt, seuraavalla kerr
 muodostaman "ruutuviivan" päässä. Jos ammus menee ohi, ammu seuravaaksi toiseen näistä ruuduista - nyt ammus osuu ja ammutaan aina vain seuraavaan ruutuun
 "ruutulinjalla", kunnes laiva tuhoutuu, ja palataan alkuperäiseen strategiaan (ammu satunnaiseen ruutuun, jossa ei ole ympyrää tai rastia).
 
-Pelisä on graaffinen käyttöliittymä (10x10 ruudukko), johon ilmestyy rastit ja ympyrät. Ammuttava ruutu valitaan hiirenpainalluksella.
+Pelissä on graaffinen käyttöliittymä (10x10 ruudukko), johon ilmestyy rastit ja ympyrät. Ammuttava ruutu valitaan hiirenpainalluksella.
+Ruudulle piirretään kaksi ruudukkoa, yksi kummallekin pelaajalle. Pelaajat eivät näe laivoja enää, kun ne on asetettu. 
+Voi valita, jos laivat asetetaan satunnaisesti, tai ne voi laittaa itse : klikataan aluksen ruutuja sen molemmista päistä. Jos asettaa laivan laittomasti,
+tai ampuessa jos ampuu jo ammuttuun ruutuun, ponnahtaa ilmoitus että koitappa uudestaan
