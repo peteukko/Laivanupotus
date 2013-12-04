@@ -29,7 +29,9 @@ public class PeliAlusta extends JPanel {
 
     private Laivue laivue;
     private JTextArea tilanne;
-
+    //private boolean onkoPelaajan1Vuoro;
+    private TilanneSelostaja selostaja;
+    
 /**
  * luokka tarvitsee tilanne-JTextArean konstruktorissa, koska itse ruutuihin 
  * liitetään ruudunPainallusKuuntelija,
@@ -38,10 +40,11 @@ public class PeliAlusta extends JPanel {
  * @param laivue  Tämän pelialustan laivue (laivue, joka on tässä pelialustassa)
  * @param tilanne Tämän laivueen tilanne, eli aluksien kunto
  */
-    public PeliAlusta(Laivue laivue, JTextArea tilanne) {
+    public PeliAlusta(Laivue laivue, TilanneSelostaja selostaja) {
         super(new BorderLayout());
         this.laivue = laivue;
-        this.tilanne = tilanne;
+
+        this.selostaja = selostaja;
         luoKomponentit();
         
     }
@@ -60,7 +63,7 @@ public class PeliAlusta extends JPanel {
         for (int x = 1; x <= 10; x++) {
             for (int y = 1; y <= 10; y++) {
                 JButton uusnappi = new JButton("o");
-                RuudunPainallusKuuntelija kuuntelija = new RuudunPainallusKuuntelija(x, y, uusnappi, laivue, tilanne);
+                RuudunPainallusKuuntelija kuuntelija = new RuudunPainallusKuuntelija(x, y, uusnappi, laivue, selostaja);
                 uusnappi.addActionListener(kuuntelija);
                 panel.add(uusnappi);
 

@@ -109,11 +109,10 @@ public class Laivue {
     }
 
     /**
-     * Ammu ruutuun (x,y)
-     * Menee läpi laivueen kaikki ruudut ja katsoo jos koordinaatit matchaa
-     * mitään näistä ruuduista. Jos näin on, tuhoaa aluksen tämän ruudun, ja
-     * tulostaa "PAM!!" 
-     * 
+     * Yrittää ampua ruutuun (x,y). Jos ruutuun on jo ammuttu aiemmin, ei 
+     * onnistu: palauta boolean osuiko = false.
+     * Jos ei ole, Menee läpi laivueen kaikki ruudut ja katsoo jos jonkin
+     * aluksen ruutu matchaa koordinaateilla. Jos näin on, tuhoaa tämän ruudun.
      * @param x
      * @param y
      * @return osuiko vihollisen alukseen
@@ -121,13 +120,17 @@ public class Laivue {
     public boolean yritaAmpuaLaivueeseen(int x, int y) {
         boolean osuiko = false;
         
+        if(ammututRuudut.onkoRuutuListalla(x, y)) {
+            return osuiko;
+        }
+        
         ammututRuudut.lisaaRuutu(x, y);
 
         for (Alus alus : Laivue) {
             boolean loytyykoruutu = alus.josAluksellaTamaRuutuTuhoaSe(x, y);
             if (loytyykoruutu) {
                 osuiko = true;
-                System.out.println("PAM!!!!");
+                //System.out.println("PAM!!!!");
             }
         }
         return osuiko;
@@ -157,7 +160,20 @@ public class Laivue {
         return palautettava;
     }
 
+    public boolean onkoRuutuunJoAmmuttu(int x, int y) {
+        if(ammututRuudut.onkoRuutuListalla(x, y)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    
     public Alus getAlus(int aluksenNumero) {
         return Laivue.get(aluksenNumero - 1);
+    }
+    
+    public String getKapteeni() {
+        return kapteeni;
     }
 }

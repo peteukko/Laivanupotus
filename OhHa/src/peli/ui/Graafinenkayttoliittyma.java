@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
 
 
 public class Graafinenkayttoliittyma implements Runnable {
@@ -15,10 +14,11 @@ public class Graafinenkayttoliittyma implements Runnable {
     private JFrame frame2;
     private Laivue pelaaja1Laivue;
     private Laivue pelaaja2Laivue;
-    
+   
+
     public Graafinenkayttoliittyma(Laivue laivue1, Laivue laivue2) {
         this.pelaaja1Laivue = laivue1;
-        this.pelaaja2Laivue = laivue2;
+        this.pelaaja2Laivue = laivue2;      
     }
 
     @Override
@@ -29,28 +29,25 @@ public class Graafinenkayttoliittyma implements Runnable {
         luoKomponentit(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
-        
 
     }
-    
-    
+
     /**
-     * Luo graafisen käyttöliittymän komponentit ja settaa ne x-suunnassa 
-     * (boxlayout) : Vasemmalla Pelaaja 1 sen pelialusta, keskellä tilannekatsaukset
-     * (JTextArea), oikealla pelaaja 2:sen pelialusta.
-     * @param container 
+     * Luo graafisen käyttöliittymän komponentit ja settaa ne x-suunnassa
+     * (boxlayout) : Vasemmalla Pelaaja 1 sen pelialusta, keskellä
+     * tilannekatsaukset (JTextArea), oikealla pelaaja 2:sen pelialusta.
+     *
+     * @param container
      */
     private void luoKomponentit(Container container) {
-        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS)); 
-        JTextArea pelaaja1tilanne = new JTextArea(pelaaja1Laivue.toString());
-        
-        container.add(new PeliAlusta(pelaaja1Laivue, pelaaja1tilanne));
-        container.add(pelaaja1tilanne);
-        JTextArea pelaaja2tilanne = new JTextArea(pelaaja2Laivue.toString());
-        container.add(pelaaja2tilanne);
-        container.add(new PeliAlusta(pelaaja2Laivue, pelaaja2tilanne));
-    }
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
+        TilanneSelostaja selostaja = new TilanneSelostaja(pelaaja1Laivue, pelaaja2Laivue);
+        
+        container.add(new PeliAlusta(pelaaja1Laivue, selostaja));
+        container.add(selostaja);
+        container.add(new PeliAlusta(pelaaja2Laivue, selostaja));
+    }
 
     public JFrame getFrame() {
         return frame;

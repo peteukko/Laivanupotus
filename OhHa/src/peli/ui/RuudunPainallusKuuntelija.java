@@ -27,22 +27,19 @@ import javax.swing.JTextArea;
 public class RuudunPainallusKuuntelija implements ActionListener {
     
     private Laivue vihollisenLaivue;
-    
-    
-    private JTextArea tilanne;
-
     private int x;
     private int y;
-    private JButton button;
+    private JButton button; 
+    private TilanneSelostaja selostaja;
     
-    public RuudunPainallusKuuntelija(int x, int y, JButton button, Laivue vihollisenLaivue, JTextArea tilanne) {
+    public RuudunPainallusKuuntelija(int x, int y, JButton button, Laivue vihollisenLaivue, TilanneSelostaja selostaja) {
         this.x = x;
         this.y = y;
         this.button = button;
         this.vihollisenLaivue = vihollisenLaivue;
-        this.tilanne = tilanne;
-        
+        this.selostaja = selostaja;
     }
+    
     
     /**
      * Kun ruutua klikataan, sihen ammutaan. Tällöin kutsutaan Laivue-luokan
@@ -56,21 +53,32 @@ public class RuudunPainallusKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         
-        //System.out.println(x+","+y);
+        if(vihollisenLaivue.getKapteeni().equals(selostaja.palautaKapteeniJonkaVuoroAmpua())) {
+            selostaja.eiSinunVuorosi();
+            return;
+        }
+        
+        if (vihollisenLaivue.onkoRuutuunJoAmmuttu(x, y)) {
+            selostaja.joAmmuttu();
+            return;
+        }
         
         boolean osuiko = vihollisenLaivue.yritaAmpuaLaivueeseen(x, y);
         if (osuiko) {
-            
             this.button.setBackground(Color.GREEN);
             this.button.setText("O");
-            //System.out.println(vihollisenLaivue);
             
         } else {
+            selostaja.vaihdaVuoroa();
             this.button.setBackground(Color.RED);
             this.button.setText("X");
         }
 
-        tilanne.setText(vihollisenLaivue.toString());
+        selostaja.paivitaTilanne();
+        if (osuiko) {
+            selostaja.osuma();
+        }
+
         
     }
     

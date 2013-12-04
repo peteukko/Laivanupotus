@@ -75,6 +75,20 @@ public class LaivueTest {
         
     }
     
+    @Test
+    public void ruutuunVoiAmpuaJosSiihenEiAiemminAmmuttuJaAmmututPaivittyy() {
+        
+    }
+    
+    @Test
+    public void ruutuunEiVoiAmpuaJosSiihenAiemminAmmuttu() {
+        
+    }
+    
+    @Test
+    public void josLaivueellaRuutuJohonAmmutaanSeTuhoutuu() {
+        
+    }
     
     
 }
