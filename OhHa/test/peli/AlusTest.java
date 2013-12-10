@@ -60,6 +60,8 @@ public class AlusTest {
         
     }
     
+    
+    
     @Test
     public void ruudunPoistaminenEliAluksenVahingoittaminenToimii() {
         pertinAlus.asetaAlus(4, 4);
@@ -99,6 +101,11 @@ public class AlusTest {
         assertEquals(sallitut.getRuutujenLkm(),2);
         assertFalse(onnistuiko);        
     } 
+    
+    @Test
+    public void alustaEiVoiAsettaaToisenAluksenPaalle() {
+        
+    }
     
     @Test
     public void alukseenAmpuminenToimii() {
