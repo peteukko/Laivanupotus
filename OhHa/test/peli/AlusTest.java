@@ -104,7 +104,14 @@ public class AlusTest {
     
     @Test
     public void alustaEiVoiAsettaaToisenAluksenPaalle() {
-        
+       Ruutulista sallitut = new Ruutulista();
+       sallitut.lisaaRuutu(2,2);
+       sallitut.lisaaRuutu(3,2);
+       sallitut.lisaaRuutu(4,2);
+       boolean onnistuiko1 = matinAlus.asetaAlusKunnolla(2,2,1, sallitut);
+       boolean onnistuiko2 = pertinAlus.asetaAlusKunnolla(2,2,1,sallitut);
+       assertTrue(onnistuiko1);
+       assertFalse(onnistuiko2); 
     }
     
     @Test
