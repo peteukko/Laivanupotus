@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class Ruutulista {
 
-    protected String nimi;
-    ArrayList<Ruutu> ruutulista;
+    //protected String nimi;
+    protected ArrayList<Ruutu> ruutulista;
 
     public Ruutulista() {
         this.ruutulista = new ArrayList<Ruutu>();
@@ -17,7 +17,7 @@ public class Ruutulista {
     
     public Ruutulista(String nimi) {
         this.ruutulista = new ArrayList<Ruutu>();
-        this.nimi = nimi;
+        //this.nimi = nimi;
     }
 
     public void lisaaRuutu(int x, int y) {
@@ -59,8 +59,12 @@ public class Ruutulista {
         return ruutulista.size();
     }
 
-    public String getNimi() {
-        return nimi;
+    //public String getNimi() {
+    //    return nimi;
+    //}
+    
+    public Ruutulista getRuutulista() {
+        return this;
     }
 
     public boolean onkoRuutuListalla(int x, int y) {

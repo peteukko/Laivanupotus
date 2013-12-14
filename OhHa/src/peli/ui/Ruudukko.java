@@ -13,67 +13,71 @@ import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.JPanel;
 
 /**
- * PeliAlusta JPanel - ilmentymä, joka koostuu 10x10 ruudukosta (GridLayout) 
- * ja lisäksi kirjainrivistä ja numerosarakkeesta.Käyttää borderlayoutia. 
- * 
+ * PeliAlusta JPanel - ilmentymä, joka koostuu 10x10 ruudukosta (GridLayout) ja
+ * lisäksi kirjainrivistä ja numerosarakkeesta.Käyttää borderlayoutia.
+ *
  * @author peteukko
  */
-public class PeliAlusta extends JPanel {
+public class Ruudukko extends JPanel {
 
-    private Laivue laivue;
-    private JTextArea tilanne;
-    //private boolean onkoPelaajan1Vuoro;
-    private TilanneSelostaja selostaja;
-    
-/**
- * luokka tarvitsee tilanne-JTextArean konstruktorissa, koska itse ruutuihin 
- * liitetään ruudunPainallusKuuntelija,
- * joka vuorostaan päivittää tilannetta jos johonkin alukseen osuu.
- * 
- * @param laivue  Tämän pelialustan laivue (laivue, joka on tässä pelialustassa)
- * @param tilanne Tämän laivueen tilanne, eli aluksien kunto
- */
-    public PeliAlusta(Laivue laivue, TilanneSelostaja selostaja) {
+    protected Laivue laivue;
+    protected JTextArea tilanne;
+    //protected TilanneSelostaja selostaja;
+    protected JPanel ruudut;
+
+    /**
+     * luokka tarvitsee tilanne-JTextArean konstruktorissa, koska itse ruutuihin
+     * liitetään ruudunPainallusKuuntelija
+     *
+     * @param laivue Tämän pelialustan laivue (laivue, joka on tässä
+     * pelialustassa)
+     * @param tilanne Tämän laivueen tilanne, eli aluksien kunto
+     */
+    public Ruudukko(Laivue laivue) {
         super(new BorderLayout());
         this.laivue = laivue;
-
-        this.selostaja = selostaja;
+        //this.selostaja = selostaja;
         luoKomponentit();
-        
+
     }
 
-    private void luoKomponentit() {
-        
+
+    protected void luoKomponentit() {
+
         add(luoKirjainRivi(), BorderLayout.NORTH);
         add(luoNumeroSarake(), BorderLayout.WEST);
         add(luoRuudukko(), BorderLayout.CENTER);
 
     }
 
-    private JPanel luoRuudukko() {
-        JPanel panel = new JPanel(new GridLayout(10, 10));
+    /**
+     *
+     * @return
+     */
+    protected JPanel luoRuudukko() {
+        ruudut = new JPanel(new GridLayout(10, 10));
 
-        for (int x = 1; x <= 10; x++) {
-            for (int y = 1; y <= 10; y++) {
-                JButton uusnappi = new JButton("o");
-                RuudunPainallusKuuntelija kuuntelija = new RuudunPainallusKuuntelija(x, y, uusnappi, laivue, selostaja);
-                uusnappi.addActionListener(kuuntelija);
-                panel.add(uusnappi);
-
+        for (int y = 1; y <= 10; y++) {
+            for (int x = 1; x <= 10; x++) {
+                Ruutu ruutu = new Ruutu(x, y);
+                ruudut.add(ruutu);
             }
         }
-        return panel;
+        return ruudut;
 
     }
+    
 
-    private JPanel luoKirjainRivi() {
+    protected JPanel luoKirjainRivi() {
         JPanel panel = new JPanel(new GridLayout(1, 11));
         JLabel tyhja = new JLabel("");
         panel.add(tyhja);
@@ -86,7 +90,7 @@ public class PeliAlusta extends JPanel {
         return panel;
     }
 
-    private JPanel luoNumeroSarake() {
+    protected JPanel luoNumeroSarake() {
         JPanel panel = new JPanel(new GridLayout(10, 1));
 
         for (int i = 1; i <= 10; i++) {
@@ -97,6 +101,5 @@ public class PeliAlusta extends JPanel {
 
         return panel;
     }
-    
 
 }

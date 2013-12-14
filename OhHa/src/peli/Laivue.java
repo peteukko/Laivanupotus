@@ -13,19 +13,18 @@ import java.util.Random;
  */
 public class Laivue {
 
-    ArrayList<Alus> Laivue;
+    private ArrayList<Alus> Laivue;
     /**
      * sallituissa ruuduissa alunperin 10 x 10. Kun alus sijoitetaan johonkin
      * ruutuihin, nämä ruudut eivät ole enää salittuja
      */
     Ruutulista sallitutRuudut;
     Ruutulista ammututRuudut;
-    
+
     private String kapteeni;
 
-    public Laivue(String kapteeni) {
+    public Laivue() {
         this.Laivue = new ArrayList<Alus>();
-        this.kapteeni = kapteeni;
         this.sallitutRuudut = new Ruutulista();
         this.ammututRuudut = new Ruutulista();
 
@@ -45,6 +44,11 @@ public class Laivue {
                 sallitutRuudut.lisaaRuutu(i, j);
             }
         }
+    }
+
+    public Laivue(String kapteeni) {
+        this();
+        this.kapteeni = kapteeni;
 
     }
 
@@ -109,21 +113,22 @@ public class Laivue {
     }
 
     /**
-     * Yrittää ampua ruutuun (x,y). Jos ruutuun on jo ammuttu aiemmin, ei 
-     * onnistu: palauta boolean osuiko = false.
-     * Jos ei ole, Menee läpi laivueen kaikki ruudut ja katsoo jos jonkin
-     * aluksen ruutu matchaa koordinaateilla. Jos näin on, tuhoaa tämän ruudun.
+     * Yrittää ampua ruutuun (x,y). Jos ruutuun on jo ammuttu aiemmin, ei
+     * onnistu: palauta boolean osuiko = false. Jos ei ole, Menee läpi laivueen
+     * kaikki ruudut ja katsoo jos jonkin aluksen ruutu matchaa koordinaateilla.
+     * Jos näin on, tuhoaa tämän ruudun.
+     *
      * @param x
      * @param y
      * @return osuiko vihollisen alukseen
      */
     public boolean yritaAmpuaLaivueeseen(int x, int y) {
         boolean osuiko = false;
-        
-        if(ammututRuudut.onkoRuutuListalla(x, y)) {
+
+        if (ammututRuudut.onkoRuutuListalla(x, y)) {
             return osuiko;
         }
-        
+
         ammututRuudut.lisaaRuutu(x, y);
 
         for (Alus alus : Laivue) {
@@ -136,11 +141,22 @@ public class Laivue {
         return osuiko;
     }
 
-    
+    public boolean onkoLaivueenJollakinAluksellaTamaRuutu(int x, int y) {
+        boolean matchaako = false;
+        for (Alus alus : Laivue) {
+            if (alus.onkoRuutuListalla(x, y)) {
+                matchaako = true;
+            }
+
+        }
+        return matchaako;
+    }
+
     /**
-     * Menee läpi kaikki laivueen alukset. Jos kaikki ovat tuhoutuneet, palauttaa
-     * false
-     * @return true, jos edes 1 alus on vielä pystyssä 
+     * Menee läpi kaikki laivueen alukset. Jos kaikki ovat tuhoutuneet,
+     * palauttaa false
+     *
+     * @return true, jos edes 1 alus on vielä pystyssä
      */
     public boolean onkoAluksiaJaljella() {
         boolean onkoAluksiaJaljella = false;
@@ -161,19 +177,62 @@ public class Laivue {
     }
 
     public boolean onkoRuutuunJoAmmuttu(int x, int y) {
-        if(ammututRuudut.onkoRuutuListalla(x, y)) {
+        if (ammututRuudut.onkoRuutuListalla(x, y)) {
             return true;
         } else {
             return false;
         }
 
     }
-    
+
+    public boolean onkoKokoLaivueAsetettu() {
+        boolean onkoKaikkiAsetettu = true;
+        for (Alus alus : Laivue) {
+            if (!alus.onkoAsetettu()) {
+                onkoKaikkiAsetettu = false;
+            }
+        }
+        return onkoKaikkiAsetettu;
+    }
+
+    public int montakoLaivaaAsetettu() {
+        int montakoLaivaaAsetettu = 0;
+        for (Alus alus : Laivue) {
+            if (alus.onkoAsetettu()) {
+                montakoLaivaaAsetettu = montakoLaivaaAsetettu + 1;
+            }
+        }
+
+        return montakoLaivaaAsetettu;
+    }
+
+    public String tulostaAsetusTila() {
+        String palautettava = "";
+        for (Alus alus : Laivue) {
+            palautettava = palautettava + alus.tulostaOnkoAsetettu() + "\n";
+        }
+        return palautettava;
+    }
+
     public Alus getAlus(int aluksenNumero) {
         return Laivue.get(aluksenNumero - 1);
     }
-    
+
     public String getKapteeni() {
         return kapteeni;
     }
+
+    public void setKapteeni(String nimi) {
+        this.kapteeni = nimi;
+    }
+
+    public Ruutulista getSallitut() {
+        return sallitutRuudut;
+
+    }
+    
+    public String tulostaLaivueenRuudut() {
+        return super.toString();
+    }
+
 }

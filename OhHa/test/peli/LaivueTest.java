@@ -68,6 +68,25 @@ public class LaivueTest {
         assertEquals(teponLaivue.sallitutRuudut.getRuutujenLkm(), 85);
 
     }
+    
+    @Test 
+    public void tietaakoLaivueJosSillaOnTiettyRuutu() {
+        teponLaivue.asetaLaivueenAlus(2, 5, 5, 1);
+        assertTrue(teponLaivue.onkoLaivueenJollakinAluksellaTamaRuutu(5, 5));
+        assertFalse(teponLaivue.onkoLaivueenJollakinAluksellaTamaRuutu(5, 9));
+    }
+    
+    @Test
+    public void laivueTietaaMontakoAlustaOnAsetettu() {
+                teponLaivue.asetaLaivueenAlus(1, 1, 1, 1);
+        teponLaivue.asetaLaivueenAlus(2, 5, 5, 1);
+        assertEquals(teponLaivue.montakoLaivaaAsetettu(), 2);
+    }
+    
+    @Test
+    public void laivueTietaaMontakoAlustaOnAsetettuJosEiYhtaan() {
+        assertEquals(teponLaivue.montakoLaivaaAsetettu(), 0);
+    }
 
     @Test
     public void ruutuunAmmuttuaAmmututPaivittyy() {
@@ -76,6 +95,8 @@ public class LaivueTest {
         teponLaivue.yritaAmpuaLaivueeseen(3, 3);
         assertTrue(teponLaivue.onkoRuutuunJoAmmuttu(3, 3));
     }
+    
+   
 
     @Test
     public void LaivuuenAluksenVoiTuhotaAmpumallaJaKokoLaivueenVoiTuhota() {

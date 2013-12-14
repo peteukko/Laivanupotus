@@ -4,26 +4,22 @@ import java.util.ArrayList;
 
 public class Alus extends Ruutulista {
 
+    private boolean onkoAsetettu;
     private int pituus;
+    private String nimi;
 
     public Alus(int pituus, String nimi) {
-        super(nimi);
+        super();
+        onkoAsetettu = false;
         this.pituus = pituus;
+        this.nimi = nimi;
 
         // Asetetaan "nollaruutu" joten Alus-olio ei ole koskaan tyhjä (voi kenties tulla ongelmia)
         Ruutu existentiaaliRuutu = new Ruutu(0, 0);
         this.lisaaRuutuOlio(existentiaaliRuutu);
     }
 
-    /**
-     * Aluksen Asettaminen, eka toteutus: ainoastaan yksi ruutu
-     *
-     * @param x x-koordinaatti
-     * @param y y-kordinaatti
-     */
-    public void asetaAlus(int x, int y) {
-        super.lisaaRuutu(x, y);
-    }
+  
 
     /**
      * Aluksen Asettaminen kunnolla: Alus asetetaan ruutuihin, jotka määriytyy
@@ -34,18 +30,24 @@ public class Alus extends Ruutulista {
      *
      * @param x x-koordinaatti
      * @param y y-kordinaatti
-     * @param suunta 1 = lähtöruudusta itään, 2 = etelään, 
-     * 3 = länteen, 4 = pohjoiseen.
-     * @param sallitut Pidetään listaa kevollisista ruuduista, jota muokataan metodissa
-     * @return onnistuuko oliko kaikki ruudut kelvollisia, onnistuiko aluksen sijoitus.
+     * @param suunta 1 = lähtöruudusta itään, 2 = etelään, 3 = länteen, 4 =
+     * pohjoiseen.
+     * @param sallitut Pidetään listaa kevollisista ruuduista, jota muokataan
+     * metodissa
+     * @return onnistuuko oliko kaikki ruudut kelvollisia, onnistuiko aluksen
+     * sijoitus.
      */
     public boolean asetaAlusKunnolla(int x, int y, int suunta, Ruutulista sallitut) {
         //Ruutu lahtoRuutu = new Ruutu(x, y);
         Ruutulista lisattavat = new Ruutulista();
 
-        if (suunta == 1) {
+        if (pituus == 1) {
+            lisattavat.lisaaRuutuOlio(new Ruutu(x,y));
+        }
+        else if (suunta == 1) {
             for (int i = 0; i < pituus; i++) {
                 lisattavat.lisaaRuutuOlio(new Ruutu((x + i), y));
+                System.out.println("| x"+Integer.toString(x+i)+"| y "+Integer.toString(y));
             }
         } else if (suunta == 2) {
             for (int i = 0; i < pituus; i++) {
@@ -65,8 +67,11 @@ public class Alus extends Ruutulista {
         if (onnistuuko) {
             super.lisaaRuutulistaTahanRuutuListaan(lisattavat);
             sallitut.poistaArgumentinRuudutTastaRuutulistasta(lisattavat);
+            onkoAsetettu = true;
 
         }
+        
+        System.out.println("Yritit asettaa laivueen ruutuihin"+lisattavat.toString());
         return onnistuuko;
 
     }
@@ -79,21 +84,22 @@ public class Alus extends Ruutulista {
         String palautettava = nimi + ": " + aluksenTila();
         if (this.onkoTuhoutunut()) {
             return palautettava + "\n TUHOUTUNUT!";
-        } else {          
-            return palautettava; 
+        } else {
+            return palautettava;
         }
     }
-    
+
     /**
-     * Palauttaa stringin, jossa aluksen "hit pointit" näkyy ruutuina. 
-     * esim   [ ] [ ] [x]   = 3 ruudun alus, joka on ottanut yhden osuman.
-     * @return 
+     * Palauttaa stringin, jossa aluksen "hit pointit" näkyy ruutuina. esim [ ]
+     * [ ] [x] = 3 ruudun alus, joka on ottanut yhden osuman.
+     *
+     * @return
      */
     public String aluksenTila() {
         String tila = "";
-        
-        int tuhoutuneetRuudut = pituus - (super.getRuutujenLkm() -1);
-        for (int i = 1; i <= (pituus-tuhoutuneetRuudut);i++) {
+
+        int tuhoutuneetRuudut = pituus - (super.getRuutujenLkm() - 1);
+        for (int i = 1; i <= (pituus - tuhoutuneetRuudut); i++) {
             tila = tila + "[ ]  ";
         }
         for (int i = 1; i <= tuhoutuneetRuudut; i++) {
@@ -117,9 +123,10 @@ public class Alus extends Ruutulista {
         super.poistaRuutu(x, y);
         return osuiko;
     }
-    
-    /** Kertoo jos alus on tuhoutunut eli ruutuja 1 kpl (existentiaaliruutu)
-     * 
+
+    /**
+     * Kertoo jos alus on tuhoutunut eli ruutuja 1 kpl (existentiaaliruutu)
+     *
      * @return true = tuhoutunut
      */
     public boolean onkoTuhoutunut() {
@@ -129,4 +136,32 @@ public class Alus extends Ruutulista {
             return false;
         }
     }
+
+    public boolean onkoAsetettu() {
+        return onkoAsetettu;
+    }
+
+    public String tulostaOnkoAsetettu() {
+        String alus = nimi + " , pituus: " + Integer.toString(pituus) + ", : ";
+        if (onkoAsetettu) {
+            return (alus + "ASETETTU!");
+        } else {
+            return (alus + "EI ASETETTU!");
+        }
+    }
+
+   public String getNimi() {
+       return nimi;
+   }
+   
+
+   public String getNimiJaPituus() {
+       String suuruus = Integer.toString(pituus);
+       return nimi+" , pituus "+suuruus;
+   }
+
+
+
+    
+
 }

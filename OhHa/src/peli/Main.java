@@ -50,11 +50,9 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Laivue laivue1 = new Laivue("USS Enterprise");
-        Laivue laivue2 = new Laivue("Kapteeni Koukku");
 
-        laivue1.asetaLaivueSatunnaisesti();
-        laivue2.asetaLaivueSatunnaisesti();
+        Laivue laivue1 = new Laivue();
+        Laivue laivue2 = new Laivue();
 
         Graafinenkayttoliittyma graafinen = new Graafinenkayttoliittyma(laivue1, laivue2);
         SwingUtilities.invokeLater(graafinen);

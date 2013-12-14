@@ -13,8 +13,7 @@ public class Ruutu {
     
     private int x;
     private int y;
-    //private boolean onkoAlusta;
-    //private boolean onkoAmmuttu;
+
     
     public Ruutu(int x, int y) {
         this.x = x;
@@ -31,7 +30,10 @@ public class Ruutu {
         return y;
     }
     
-    
+    public Ruutu getRuutu() {
+        return this;
+    }
+   
     public boolean matchaakoKoordinaatit(int x2, int y2) {
         return (x2 == x && y2 == y);
         

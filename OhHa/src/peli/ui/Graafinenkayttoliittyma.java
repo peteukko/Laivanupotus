@@ -7,18 +7,23 @@ import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 
-
 public class Graafinenkayttoliittyma implements Runnable {
 
     private JFrame frame;
-    private JFrame frame2;
+
     private Laivue pelaaja1Laivue;
     private Laivue pelaaja2Laivue;
-   
+    private Peli peli;
+    private Aloitus pelinAloitusPaneeli;
+    private LaivojenAsetusVaihe asetusVaihe;
 
     public Graafinenkayttoliittyma(Laivue laivue1, Laivue laivue2) {
         this.pelaaja1Laivue = laivue1;
-        this.pelaaja2Laivue = laivue2;      
+        this.pelaaja2Laivue = laivue2;
+        this.peli = new Peli(pelaaja1Laivue, pelaaja2Laivue);
+        this.asetusVaihe = new LaivojenAsetusVaihe(peli, pelaaja1Laivue, pelaaja2Laivue);
+        this.pelinAloitusPaneeli = new Aloitus(peli, asetusVaihe, pelaaja1Laivue, pelaaja2Laivue);
+
     }
 
     @Override
@@ -40,13 +45,16 @@ public class Graafinenkayttoliittyma implements Runnable {
      * @param container
      */
     private void luoKomponentit(Container container) {
+
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
-        TilanneSelostaja selostaja = new TilanneSelostaja(pelaaja1Laivue, pelaaja2Laivue);
-        
-        container.add(new PeliAlusta(pelaaja1Laivue, selostaja));
-        container.add(selostaja);
-        container.add(new PeliAlusta(pelaaja2Laivue, selostaja));
+        container.add(pelinAloitusPaneeli);
+
+        asetusVaihe.setVisible(false);
+        container.add(asetusVaihe);
+
+        peli.setVisible(false);
+        container.add(peli);
     }
 
     public JFrame getFrame() {
