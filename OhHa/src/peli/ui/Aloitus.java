@@ -8,10 +8,6 @@ package peli.ui;
 import peli.Laivue;
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import java.awt.Container;
-import java.awt.Dimension;
-import javax.swing.WindowConstants;
-import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -24,7 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
+ * GUI: Pelin aloitus: ensimmäinen ikkuna.
+ * Tässä kirjoitetaan pelin nimet ja valitaan jos alukset halutaan itse asettaa
+ * pelikentälle, tai jos ne asetetaan automaattisesti (hyppää tällöin suoraan peliin)
+ * Implementoi actionlistenerin suoraan (ruutuja painettaessa riippuu ruudusta,
+ * mitä tapahtuu: actionPerformed käyttää painikkeen getSourcea selvittääkseen
+ * mitä nappia painettiin, ja sen mukaan mennään laivan asetusmoodiin tai peliin.
  * @author peter_000
  */
 public class Aloitus extends JPanel implements ActionListener {
@@ -71,6 +72,11 @@ public class Aloitus extends JPanel implements ActionListener {
         add(pelaa2);
     }
 
+    /**
+     * Molempiin nappeihin on kytketty sama actionlistener: käyttää getsourcea
+     * selvittääkseen mitä nappia painettiin. 
+     * @param event 
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
 
@@ -80,20 +86,18 @@ public class Aloitus extends JPanel implements ActionListener {
         laivue2.setKapteeni(kapteeni2);
 
 
-        this.setVisible(false);
+        this.setVisible(false); // Seuraavaan vaiheeseen siirryttäessä tämä piilotetaan
 
         if (event.getSource() == pelaa1) {
-            asetusVaihe.setVisible(true);
+            asetusVaihe.setVisible(true); //Asetusvaihe tulee näkyviin
             asetusVaihe.repaint();
         }
 
         if (event.getSource() == pelaa2) {
             laivue1.asetaLaivueSatunnaisesti();
             laivue2.asetaLaivueSatunnaisesti();
-            peli.paivitaTilanne();
-    //        peli.repaint();
-      //      peli.validate();
-            peli.setVisible(true);
+            peli.paivitaTilanne(); 
+            peli.setVisible(true); // Itse peli tulee näkyviin
         }
 
     }

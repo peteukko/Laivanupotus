@@ -18,6 +18,9 @@ import peli.Alus;
 import peli.Laivue;
 
 /**
+ * Ruudukko - luokan aliluokka. Tämä näyttää identtiseltä Ruudukon kanssa, mutta
+ * ruutuihin on kytketty ActionListeneria implementoivan
+ * RuudunPainallusKuuntelija, joka on nested luokka tässä luokassa.
  *
  * @author peter_000
  */
@@ -32,6 +35,12 @@ public class LaivanAsetusRuudukko extends Ruudukko {
     private String selostaja;
     private JTextArea laivueenAsetusTilanne;
 
+    /**
+     * Konstruktorissa liitetään tapahtuman kuuntelijat jokaiseen ruutuun.
+     *
+     * @param laivue
+     * @param laivueenAsetusTilanne
+     */
     public LaivanAsetusRuudukko(Laivue laivue, JTextArea laivueenAsetusTilanne) {
         super(laivue);
         x1 = 0;
@@ -43,6 +52,10 @@ public class LaivanAsetusRuudukko extends Ruudukko {
         ekaRuutuValittu = false;
         tokaRuutuValittu = false;
 
+        /**
+         * Mennään läpi kaikki JPanelin komponentit (ruudut) ja liitetään
+         * jokaiseen ruudunPainallusKuuntelija.
+         */
         for (Component c : super.ruudut.getComponents()) {
             if (c instanceof Ruutu) {
                 int x = ((Ruutu) c).getXkord();
@@ -55,12 +68,11 @@ public class LaivanAsetusRuudukko extends Ruudukko {
 
     }
 
-    public boolean laivanAsettaja(Alus alus) {
-        boolean onnistuiko = false;
-
-        return onnistuiko;
-    }
-
+    /**
+     * Tämä metodi käy läpi kaikki ruudut ja tarkistaa, jos alus on kyseisessä
+     * ruudussa. Tällöin se maalataan vihreäksi. Näin pelaaja näkee laivoja
+     * asettaessa kokonaistilanteen.
+     */
     public void merkitseRuudutJoissaAlus() {
         for (Component c : super.ruudut.getComponents()) {
             if (c instanceof Ruutu) {
@@ -117,11 +129,10 @@ public class LaivanAsetusRuudukko extends Ruudukko {
             //Ruutua klikattaessa voi olla että pelaaja klikkasi "lähtöruutua"
             // tai "päätyruutua". Boolean ekaRuutuValittu pitää tästä laskua.
             if (x1 == 0) { //Jos tämä oli ensimmäinen klikkaus koko sessiossa
-                onnistuiko = laivue.asetaLaivueenAlus(1, x, y, 1);
-                selostaja = "Aseta " + laivue.getAlus(2).getNimiJaPituus();
-
+                onnistuiko = laivue.asetaLaivueenAlus(1, x, y, 1); //Asetetaan 1-alus (sukellusvene, pituus 1)
+                selostaja = "Aseta " + laivue.getAlus(2).getNimiJaPituus(); // Päivitetään selostajaa: aseta nyt alus 2.
                 x1 = 1;
-            } else if (!ekaRuutuValittu) {
+            } else if (!ekaRuutuValittu) { // Jos tämä oli ensimmäinen klikkaus: ekaRuutuValittu muuttuu nyt trueksi            
                 x1 = x;
                 y1 = y;
                 ekaRuutuValittu = true;
@@ -145,9 +156,6 @@ public class LaivanAsetusRuudukko extends Ruudukko {
                     suunta = 4;
                 }
 
-                // System.out.println("x, y: "+x+" ,"+y);
-                // System.out.println("x1, y1: "+x1+" ,"+y1+"  X2, y2: " +x2+" ,"+y2);
-                //System.out.println("Ekaruutuvalittu" +ekaRuutuValittu);
                 if (laivue.montakoLaivaaAsetettu() == 1) {
 
                     onnistuiko = laivue.asetaLaivueenAlus(2, x1, y1, suunta);
@@ -162,12 +170,14 @@ public class LaivanAsetusRuudukko extends Ruudukko {
                     if (onnistuiko) {
                         selostaja = "Aseta " + laivue.getAlus(4).getNimiJaPituus();
                     }
+
                 } else if (laivue.montakoLaivaaAsetettu() == 3) {
 
                     onnistuiko = laivue.asetaLaivueenAlus(4, x1, y1, suunta);
                     if (onnistuiko) {
                         selostaja = "Aseta " + laivue.getAlus(5).getNimiJaPituus();
                     }
+
                 } else if (laivue.montakoLaivaaAsetettu() == 4) {
 
                     onnistuiko = laivue.asetaLaivueenAlus(5, x1, y1, suunta);
@@ -177,7 +187,7 @@ public class LaivanAsetusRuudukko extends Ruudukko {
                 }
 
                 if (onnistuiko) {
-                    suunta = 0;
+                    suunta = 0; //resetoidaan suunta
                 } else {
                     selostaja = "Ei onnannut. koitappas uudestaan";
                 }
@@ -185,10 +195,9 @@ public class LaivanAsetusRuudukko extends Ruudukko {
                 ekaRuutuValittu = false;
 
             }
-
+            // Maalataan ruudut joissa on alus metodilla merkitseRuudutjoissaAlus
             merkitseRuudutJoissaAlus();
-            //     System.out.println("suunta oli äsken "+Integer.toString(suunta));
-            System.out.println(laivue.tulostaLaivueenRuudut());
+
 
             // Ja päivitettään JTextArea Laivueenasetustilanne
             laivueenAsetusTilanne.setText(laivue.tulostaAsetusTila() + "\n" + selostaja);;

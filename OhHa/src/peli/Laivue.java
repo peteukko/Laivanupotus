@@ -8,6 +8,7 @@ import java.util.Random;
  * kapteeni) ja lista ruuduista, johon laivueen aluksia voi asettaa. Alunperin
  * koko pelilauta, mutta päivittyy asettamisen mukaan (laivoja ei voi laittaa
  * päällekäin)
+ * Pitää lisäksi listaa ruuduista, johon on ammuttu yrittäessä osua tähän laivueeseen.
  *
  * @author Pepe
  */
@@ -39,6 +40,7 @@ public class Laivue {
         Laivue.add(taistelulaiva);
         Laivue.add(lentotukialus);
 
+        // Alusta pelilauta
         for (int i = 1; i < 11; i++) {
             for (int j = 1; j < 11; j++) {
                 sallitutRuudut.lisaaRuutu(i, j);
@@ -55,7 +57,7 @@ public class Laivue {
     /**
      * Aseta laivueen aluksenNumero-numeroa vastaava alus (1: ensimmäinen eli
      * sukellusvene) lähtöruudusta (x,y) suuntaan (int suunta = 1:4)
-     * määrittämiin ruutuihin
+     * määrittämiin ruutuihin. Katso Alus-luokan asetaAlusKunnolla-metodi
      *
      * @param aluksenNumero
      * @param x
@@ -147,7 +149,6 @@ public class Laivue {
             if (alus.onkoRuutuListalla(x, y)) {
                 matchaako = true;
             }
-
         }
         return matchaako;
     }
@@ -176,6 +177,12 @@ public class Laivue {
         return palautettava;
     }
 
+    /**
+     * Onko (x-y) koordinaatteja vastaavaan ruutuun jo ammuttu 
+     * @param x
+     * @param y
+     * @return 
+     */
     public boolean onkoRuutuunJoAmmuttu(int x, int y) {
         if (ammututRuudut.onkoRuutuListalla(x, y)) {
             return true;
@@ -184,7 +191,10 @@ public class Laivue {
         }
 
     }
-
+/**
+ * Onko kaikki laivueen alukset asetettu pelikentälle
+ * @return boolean
+ */
     public boolean onkoKokoLaivueAsetettu() {
         boolean onkoKaikkiAsetettu = true;
         for (Alus alus : Laivue) {

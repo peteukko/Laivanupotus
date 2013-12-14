@@ -7,8 +7,12 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @Laivanupotuksen beta
+ * @Laivanupotuksen v1.0
  * Main - luokassa ajetaan itse peli
+ * 
+ * 13.12: Toimiva laivanupotuspeli jota pelataan vastakkain (kaksi ihmistä).
+ * Laivojen asetus ja itse peli molemmat toimivat nyt.
+ * 
  * 
  * 28.11 päivitys:
  * Toimii: Graafinen käyttöliittymä, ampuminen ruutua klikkaamalla, tilanteen 

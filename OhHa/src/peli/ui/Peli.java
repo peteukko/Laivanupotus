@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 import peli.Laivue;
 
 /**
- *
+ * Tämä luokka vastaa itse pelattavaa osuutta pelistä.
+ * Peli on JPaneeli jossa on molempien pelaajien ruudukot sekä keskellä tilanneselostaja.
  * @author peter_000
  */
 public class Peli extends JPanel {

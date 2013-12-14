@@ -15,20 +15,25 @@ import javax.swing.JPanel;
 import peli.Laivue;
 
 /**
- *
+ * Ruudukko - luokan ilmentymä. Tämä on kuin ruudukko, mutta ruutuihin on
+ * laivanAsetusRuudukon tapaan liitetty tapahtumankuuntelija, joka on oma 
+ * nested luokkansa. Ruutua painettaessa siihen ammutaan.
+ * Lisäksi PelattavaRuudukolla on Tilanneselostaja. Tämä kertoo , mikä on pelin
+ * tilanne: montako alusta pelaajilla on jäljellä ja paljonko aluksilla on elämiä
+ * jäljellä, ja kumman pelaajan vuoro on.
  * @author peter_000
  */
 public class PelattavaRuudukko extends Ruudukko {
 
     private TilanneSelostaja selostaja;
     
-
     public PelattavaRuudukko(Laivue laivue, TilanneSelostaja selostaja) {
         super(laivue);
         this.selostaja = selostaja;
         
         /**
-         * 
+         * Käydään läpi kaikki JPanelin komponentit eli Ruudut ja liitetään näihin
+         * RuudunPainallusKuuntelija
          */
         for (Component c : super.ruudut.getComponents()) {
             if (c instanceof Ruutu) {
@@ -71,18 +76,22 @@ public class PelattavaRuudukko extends Ruudukko {
         @Override
         public void actionPerformed(ActionEvent ae) {       
             
-
+            // Kumman vuoron selvittäminen tapahtuu ensin, jos pelaaja kenen 
+            // vuoro ei ollut yritti ampua niin tuleee tästä ilmoitus
             if (vihollisenLaivue.getKapteeni().equals(selostaja.palautaKapteeniJonkaVuoroAmpua())) {
                 selostaja.eiSinunVuorosi();
                 return;
             }
 
+            // Jos ruutuun on jo ammuttu niin tulee tästä ilmoitus
             if (vihollisenLaivue.onkoRuutuunJoAmmuttu(this.x, this.y)) {
                 selostaja.joAmmuttu();
                 return;
             }
 
+            // Ammutaan ruutuun.
             boolean osuiko = vihollisenLaivue.yritaAmpuaLaivueeseen(x, y);
+            
             if (osuiko) {
                 this.button.setBackground(Color.GREEN);
                 this.button.setText("O");
@@ -94,8 +103,9 @@ public class PelattavaRuudukko extends Ruudukko {
             }
 
             selostaja.paivitaTilanne();
+            
             if (osuiko) {
-                selostaja.osuma();
+                selostaja.osuma(); // PAM!
             }
 
         }

@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 
 /**
  * PeliAlusta JPanel - ilmentymä, joka koostuu 10x10 ruudukosta (GridLayout) ja
- * lisäksi kirjainrivistä ja numerosarakkeesta.Käyttää borderlayoutia.
+ * lisäksi kirjainrivistä ja numerosarakkeesta. Käyttää borderlayoutia.
  *
  * @author peteukko
  */
@@ -31,21 +31,15 @@ public class Ruudukko extends JPanel {
 
     protected Laivue laivue;
     protected JTextArea tilanne;
-    //protected TilanneSelostaja selostaja;
     protected JPanel ruudut;
 
     /**
-     * luokka tarvitsee tilanne-JTextArean konstruktorissa, koska itse ruutuihin
-     * liitetään ruudunPainallusKuuntelija
-     *
      * @param laivue Tämän pelialustan laivue (laivue, joka on tässä
      * pelialustassa)
-     * @param tilanne Tämän laivueen tilanne, eli aluksien kunto
      */
     public Ruudukko(Laivue laivue) {
         super(new BorderLayout());
         this.laivue = laivue;
-        //this.selostaja = selostaja;
         luoKomponentit();
 
     }
@@ -60,7 +54,7 @@ public class Ruudukko extends JPanel {
     }
 
     /**
-     *
+     * 10x10 GridLayout - JPaneeli, joka koostuu ruuduista.
      * @return
      */
     protected JPanel luoRuudukko() {
@@ -76,7 +70,10 @@ public class Ruudukko extends JPanel {
 
     }
     
-
+/**
+ * Oldskool - kirjainrivi pelialustan yläreunassa.
+ * @return 
+ */
     protected JPanel luoKirjainRivi() {
         JPanel panel = new JPanel(new GridLayout(1, 11));
         JLabel tyhja = new JLabel("");
@@ -90,6 +87,10 @@ public class Ruudukko extends JPanel {
         return panel;
     }
 
+    /**
+     * Numerosarake pelialustan vasemmalla puolella.
+     * @return 
+     */
     protected JPanel luoNumeroSarake() {
         JPanel panel = new JPanel(new GridLayout(10, 1));
 

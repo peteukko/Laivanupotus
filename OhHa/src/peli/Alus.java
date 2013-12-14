@@ -1,9 +1,15 @@
 package peli;
 
 import java.util.ArrayList;
-
+/**
+ * Alus on Ruutulistan aliluokka. Sillä on Ruutulistan ominaisuuksien lisäksi
+ * int pituus (1-5) joka merkkaa minkä pituisesta aluksesta on kyse, sekä nimi:
+ * esim taistelulaiva on 4 ruudun pituinen alus.
+ * @author peter_000
+ */
 public class Alus extends Ruutulista {
 
+    //Onko alus asetettu laudalle: false, ennen kuin se asetetaan
     private boolean onkoAsetettu;
     private int pituus;
     private String nimi;
@@ -80,6 +86,12 @@ public class Alus extends Ruutulista {
         super.poistaRuutuOlio(ruutu);
     }
 
+    
+    /**
+     * kertoo aluksen tilan - kuinka monta ruutua sillä on jäljellä, tai jos 
+     * se on tuhoutunut.
+     * @return String 
+     */
     public String toString() {
         String palautettava = nimi + ": " + aluksenTila();
         if (this.onkoTuhoutunut()) {
@@ -141,6 +153,11 @@ public class Alus extends Ruutulista {
         return onkoAsetettu;
     }
 
+    
+    /**
+     * Palauttaa stringin joka kertoo yksinkertaisesti onko alus asetettu.
+     * @return String
+     */
     public String tulostaOnkoAsetettu() {
         String alus = nimi + " , pituus: " + Integer.toString(pituus) + ", : ";
         if (onkoAsetettu) {

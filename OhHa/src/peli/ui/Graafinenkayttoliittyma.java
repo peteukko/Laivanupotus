@@ -6,11 +6,18 @@ import java.awt.Dimension;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-
+/**
+ * Laivanupotuksen GUI: 3 vaihetta (pelin intro, jossa kysytään nimet, laivojen
+ * asettaminen, jolloin pelaajat asettavat vuorotellen aluksensa pelilaudalle,
+ * sekä itse peli), joita vastaa luokat Aloitus , LaivojenAsetusVaihe, sekä Peli.
+ * Pelivaiheesta hyppy toiseen tapahtuu aina JPaneelien setVisiblen kanssa, 
+ * ainoastaan LaivojenAsetusVaiheessakäytetään sisäisesti CardLayoutia 
+ * vaihtaessa pelaajaa. 
+ * @author peter_000
+ */
 public class Graafinenkayttoliittyma implements Runnable {
 
     private JFrame frame;
-
     private Laivue pelaaja1Laivue;
     private Laivue pelaaja2Laivue;
     private Peli peli;
@@ -34,7 +41,6 @@ public class Graafinenkayttoliittyma implements Runnable {
         luoKomponentit(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
-
     }
 
     /**
@@ -47,12 +53,9 @@ public class Graafinenkayttoliittyma implements Runnable {
     private void luoKomponentit(Container container) {
 
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-
         container.add(pelinAloitusPaneeli);
-
         asetusVaihe.setVisible(false);
         container.add(asetusVaihe);
-
         peli.setVisible(false);
         container.add(peli);
     }

@@ -12,6 +12,7 @@ import peli.*;
 
 /**
  * Graafinen ruutu: JButton, jolla on koordinaatit x ja y
+ * extendaa JButtonin! Asettaa konstruktorissa titlen "o"
  */
 public class Ruutu extends JButton {
 

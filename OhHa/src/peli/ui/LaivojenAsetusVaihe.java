@@ -18,7 +18,12 @@ import javax.swing.JTextArea;
 import peli.Laivue;
 
 /**
- *
+ * GUI:n kakkosvaihe / toinen ikkuna jossa asetetaan alukset. Tässä JPaneelissa
+ * on itse Ruudukko . Molemmilla pelaajilla on Ruudukko, ja käytetään CardLayoutia
+ * siiryttäekseen seuraavan pelaajan ruudukkoon.
+ * Itse ruudukon lisäksi on JTextArea laivueenAsetusTilanne, joka kertoo montako
+ * alusta on vielä laittamatta ja mikä on seuraava joka tulee asettaa.
+ * 
  * @author peter_000
  */
 public class LaivojenAsetusVaihe extends JPanel {
@@ -57,12 +62,7 @@ public class LaivojenAsetusVaihe extends JPanel {
 
     private void luoKomponentit() {
 
-        //add(pelaaja1Ruudukko);
-        // pelaaja2Ruudukko.setVisible(false);
-        //add(pelaaja2Ruudukko, BorderLayout.CENTER);
-        //JTextArea laivanAsetusTilanne = new JTextArea(pelaaja1Laivue.tulostaAsetusTila());
-        //add(laivanAsetusTilanne);
-        //add(new JButton("Valmis"));
+
         JPanel ylempiPaneeli = ylempiPaneeli();
         add(ylempiPaneeli, BorderLayout.CENTER);
         JButton valmis = new JButton("Valmis");
@@ -72,9 +72,13 @@ public class LaivojenAsetusVaihe extends JPanel {
 
     }
 
+    /**
+     * ylempiPaneeli = ruudukko + tilannekatsaus.
+     * @return 
+     */
     private JPanel ylempiPaneeli() {
 
-        //korttiPaneeli.setLayout(kortit);
+;
         JPanel pelaaja1Kortti = new JPanel();
         pelaaja1Kortti.setLayout(new BoxLayout(pelaaja1Kortti, BoxLayout.X_AXIS));
 
@@ -92,9 +96,18 @@ public class LaivojenAsetusVaihe extends JPanel {
         return korttiPaneeli;
     }
 
+    /** 
+     * Kun kaikki laivat on asetettu, tulee kyttäjän painaa Valmis- nappia.
+     * Tässä on tapahtumankuuntelija. Jos ensimmäinen pelaaja oli asettanut
+     * laivat ja painaa nappia (eli kakkospelaajan laivue on vielä asettamatta)
+     * hypätään seuraavaan korttiin cardlayoutissa eli kakkos pelaaja asettaa
+     * nyt laivat.
+     * Jos molemmat pelaajat olivat asettaneet aluksensa, hypätään itse peliin!
+     * 
+     */
     public class valmisNapinKuuntelija implements ActionListener {
 
-        JPanel tama;
+        JPanel tama; //LaivojenAsetusVaihe
 
         public valmisNapinKuuntelija(JPanel tama) {
             this.tama = tama;
@@ -103,9 +116,9 @@ public class LaivojenAsetusVaihe extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-
+           
             if (pelaaja1Laivue.onkoKokoLaivueAsetettu() && pelaaja2Laivue.onkoKokoLaivueAsetettu()) {
-                tama.setVisible(false);
+                tama.setVisible(false); 
                 peli.paivitaTilanne();
                 peli.setVisible(true);
             } else if (!pelaaja1Laivue.onkoKokoLaivueAsetettu()) {
