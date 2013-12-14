@@ -54,7 +54,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         Laivue laivue1 = new Laivue();
         Laivue laivue2 = new Laivue();
 

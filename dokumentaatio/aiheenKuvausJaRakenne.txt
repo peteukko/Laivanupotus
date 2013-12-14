@@ -4,7 +4,7 @@ pysty- tai vaakaasennossa.
 
 Pidetään listaa sallituista ruuduista johon laivan voi asettaa (alunperin 10x10), koska alukset eivät voi mennä päällekkäin. 
 Kun alus asetetaan, pitää tarkistaa, ovatko kaikki ruudut, johon alus tulisi, sallittuja ruutuja. Aluksen asetus määriytyy
-"lähtöruudusta": esim (1,1) ja "suunnasta" (1-4) esim 1: länteen lähtöruudusta.
+"lähtöruudusta": esim (1,1) ja "suunnasta" (1-4), esim int suunta = 1 : länteen lähtöruudusta.
 Kun alus asetetaan johonkin ruutuun, tämä tulee poistaa sallituista ruuduista.
 
 
@@ -13,14 +13,27 @@ rasti, jos ammus osui laivaan, ja ympyrä, jos ammus ei osunnut laivaan. Jos ammu
 Alus tuhoutuu, kun jokaiseen sen täyttämään ruutuun on ammuttu. Alus merkitään tällöin tuhoutuneeksi. 
 Pelaaja, joka ensiksi tuhoaa kaikki vastustajan laivat, voittaa pelin.
 
-Tietokoneella on yksinkertoinen keinoäly: ammutaan satunnaiseen ruutuun, jossa ei ola ympyrää tai rastia. 
-Tätä toistetaan, kunnes ammus osuu laivaan. Tällöin pistetään ruutu muistiin: seuraavalla vuorolla ammutaan satunnaiseen vieressä olevaan ruutuun.  
-Jos ammus menee tällä kertaa ohi, ammutaan tätä seuraavalla vuorolla toiseen ruutuun, joka on alkuperäisen ruudun vierellä (ja jossa ei ole ympyrää tai rastia).
-Jos ammus osui, merkitään tämä toinen ruutu myös muistiin: nyt, seuraavalla kerralla ammutaan jompaankumpaan ruutuun, joka on kahden merkityn  ruudun
-muodostaman "ruutuviivan" päässä. Jos ammus menee ohi, ammu seuravaaksi toiseen näistä ruuduista - nyt ammus osuu ja ammutaan aina vain seuraavaan ruutuun
-"ruutulinjalla", kunnes laiva tuhoutuu, ja palataan alkuperäiseen strategiaan (ammu satunnaiseen ruutuun, jossa ei ole ympyrää tai rastia).
-
 Pelissä on graaffinen käyttöliittymä (10x10 ruudukko), johon ilmestyy rastit ja ympyrät. Ammuttava ruutu valitaan hiirenpainalluksella.
-Ruudulle piirretään kaksi ruudukkoa, yksi kummallekin pelaajalle. Pelaajat eivät näe laivoja enää, kun ne on asetettu. 
-Voi valita, jos laivat asetetaan satunnaisesti, tai ne voi laittaa itse : klikataan aluksen ruutuja sen molemmista päistä. Jos asettaa laivan laittomasti,
-tai ampuessa jos ampuu jo ammuttuun ruutuun, ponnahtaa ilmoitus että koitappa uudestaan
+Ruudulle piirretään kaksi ruudukkoa, yksi kummallekin pelaajalle. 
+
+Aluksien asettaminen toimii myös GUI:n kautta. Ensin pelaaja 1 asettaa aluksensa (pelaaja 2, katso poispäin).
+Kun johonkiin ruutuihin on asetettu alus muuttuu nämä vihreäksi. Kun pelaaja 1 on valmis, asettaa 2 -pelaaja aluksensa (1-pelaajan ruudukko katoaa).
+
+Voi valita, jos laivat asetetaan satunnaisesti, tai ne voi laittaa itse : klikataan aluksen ruutuja sen molemmista päistä.
+
+Tällä laivanupotus-pelillä on HYVIN selkeä luokkarakenne ja toiminallisuus. Selkeys oli se, johon olen panostanut alusta asti eniten. 
+Periaatteita kuten perimistä on käytetty runsaasti. Lähes kaikki metodit ovat itsestään selviä. Näin rakennekuvaukse 
+tekeminen tuntuu pöljältä, kun se ilmenee luokkien dokumentoinnista. 
+Pelilogiikan luokkarakenne on kuitenkin seuraava:
+Alimpana on Ruutu-luokka, jolla on x ja y koordinaatit. Ruutulista (esim 10x10 Ruutu = pelialusta) on ArrayList ruuduista. Alus on 
+myös Ruutulistan ilmentymä: Esim risteilijä-aluksessa on 3 ruutua. Ylimpänä on Laivue, joka on ArrayList Aluksista. Molemmilla pelaajilla
+on yksi laivue, joka koostuu 5 aluksesta. Ammuttaessa vihollisen pelikentälle mennään vain läpi tämän laivueen kaikki ruudut, ja katsotaan jos
+ammuttava ruutu on näissä.
+
+GUI:ssa on 3 pelin vaihetta: Aloitusruutu, jossa kysytään pelaajien nimet ja jos halutaan että laivat asetetaan manuaalisesti vai automaattisesti.
+Valinnasta riippuen hypätään itse peliin tai LaivanAsetusVaiheeseen (2. vaihe), joissa painetaan aina 2 ruutua kerrallaan jotka määrittää
+mihin tulee alus. Kun molemmat pelaajat ovat asettaneet aluksensa hypätään peliin (3. vaihe, Peli-luokka) jossa ammutaan vuorottain vastustajan ruudukkoa.
+Koodiin selkiyttämiseksi on kuitenkin käytetty apuluokkia ja perimistä. Alimpana on jälleen kerran Ruutu, joka on JButton jolla on int x ja y.
+Ylempänä on Ruudukko. molemmilla pelaajilla on omat ruudukot sekä Asetus-vaiheessa että peli-vaiheessa. LaivanAsetusRuudukko sekä Peli ovat Ruudukon 
+ilmentymiä! Viimeisenä on TilanneSelostaja, joka pitää yllä pelin tilannetta ja kirjotitaa sen ruudulle, pelaajien ruudukkojen väliin.
+Runnable on Graafinenkayttoliittyma.
